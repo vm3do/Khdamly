@@ -28,6 +28,130 @@
             width: 120px;
             height: auto;
         }
+        
+        /* Container Styles */
+        .container {
+            max-width: 1400px;
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: 4rem;
+                padding-right: 4rem;
+            }
+        }
+        @media (min-width: 1280px) {
+            .container {
+                padding-left: 6rem;
+                padding-right: 6rem;
+            }
+        }
+        
+        /* Hero Styles */
+        .hero-oval-frame {
+            width: 400px;
+            height: 500px;
+            border: 2px solid #c5a572;
+            border-radius: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        
+        .decorative-line {
+            width: 150px;
+            height: 2px;
+            background: #c5a572;
+            transform-origin: left;
+            animation: expandLine 1.5s ease-out forwards;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Button Styles */
+        .cta-primary {
+            background: #c5a572;
+            color: #000;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #c5a572;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .cta-primary:hover {
+            background: #d4b285;
+            border-color: #d4b285;
+            transform: translateY(-2px);
+        }
+        
+        .cta-secondary {
+            background: transparent;
+            color: #c5a572;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #c5a572;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .cta-secondary:hover {
+            background: rgba(197, 165, 114, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes expandLine {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+        }
+        
+        .hero-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(197, 165, 114, 0.2), rgba(0,0,0,0.8));
+            mix-blend-mode: overlay;
+        }
+
+        @media (max-width: 768px) {
+            .hero-oval-frame {
+                width: 280px;
+                height: 350px;
+            }
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            .cta-primary, .cta-secondary {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -35,7 +159,7 @@
 <body class="bg-cream font-montserrat text-gray-800">
     <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 lg:px-8">
+        <div class="container mx-auto">
             <div class="flex justify-between items-center py-5">
                 <!-- Logo -->
                 <a href="#" class="flex items-center gap-2">
@@ -84,29 +208,59 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative h-screen">
-        <div class="absolute inset-0 bg-luxury-green opacity-90 z-10"></div>
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1721508490084-1b1de5b230d4?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center"></div>
-        <div class="relative z-20 container mx-auto px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center">
-            <h1 class="font-playfair text-5xl md:text-7xl text-gold mb-5">Khdamly</h1>
-            <p class="font-cormorant text-2xl md:text-3xl text-light-gold mb-10 italic">Where Artisan Excellence Meets Timeless Elegance</p>
-            <div class="flex flex-col md:flex-row gap-6">
-                <a href="#artisans" class="bg-gold hover:bg-light-gold text-luxury-green font-semibold py-3 px-10 rounded-md transition duration-300">Discover Artisans</a>
-                <a href="#how-it-works" class="border-2 border-gold text-gold hover:bg-gold hover:text-luxury-green font-semibold py-3 px-10 rounded-md transition duration-300">How It Works</a>
+    <section class="overflow-hidden relative min-h-screen bg-black">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1721508490084-1b1de5b230d4?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center opacity-50"></div>
+        <div class="hero-image-overlay"></div>
+        
+        <!-- Main Content -->
+        <div class="relative z-20 container mx-auto min-h-screen">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 min-h-screen items-center">
+                <!-- Left Column - Text Content -->
+                <div class="space-y-8">
+                    <div class="space-y-4">
+                        <p class="hero-subtitle text-gold tracking-widest">Discover Excellence</p>
+                        <div class="decorative-line mb-6"></div>
+                        <h1 class="hero-title font-playfair text-gold">The Light Within You</h1>
+                        <p class="font-cormorant text-2xl text-light-gold mt-4">Where Artisan Excellence Meets Timeless Elegance</p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-6 mt-12">
+                        <a href="#join" class="cta-primary rounded-md">
+                            Become an Artisan
+                        </a>
+                        <a href="#discover" class="cta-secondary rounded-md">
+                            Explore Collection
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Image Frame -->
+                <div class="relative flex justify-center items-center">
+                    <div class="hero-oval-frame floating-element">
+                        <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                             alt="Featured Artisan" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <!-- Decorative Elements -->
+                    <div class="absolute -top-12 -right-12 w-24 h-24 border-2 border-gold rounded-full floating-element" style="animation-delay: -2s"></div>
+                    <div class="absolute -bottom-8 -left-8 w-16 h-16 border-2 border-gold rounded-full floating-element" style="animation-delay: -4s"></div>
+                    <div class="absolute top-1/2 -right-4 w-8 h-8 bg-gold rounded-full floating-element" style="animation-delay: -1s"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Artisans Section -->
+    <!-- Featured Artisans -->
     <section id="artisans" class="py-24 bg-white">
-        <div class="container mx-auto px-6 lg:px-8">
+        <div class="container mx-auto">
             <div class="text-center mb-20">
                 <h2 class="font-playfair text-4xl text-luxury-green mb-5">Featured Artisans</h2>
                 <div class="w-24 h-1 bg-gold mx-auto"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Artisan Card 1 -->
+                <!-- Card -->
                 <div class="group gold-shadow rounded-lg overflow-hidden transition duration-300 hover:shadow-xl">
                     <div class="relative h-80 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Pottery Artisan" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
@@ -122,7 +276,7 @@
                     </div>
                 </div>
                 
-                <!-- Artisan Card 2 -->
+                <!-- Card 2 -->
                 <div class="group gold-shadow rounded-lg overflow-hidden transition duration-300 hover:shadow-xl">
                     <div class="relative h-80 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1684259499086-93cb3e555803?q=80&w=1924&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Textile Artisan" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
@@ -138,7 +292,7 @@
                     </div>
                 </div>
                 
-                <!-- Artisan Card 3 -->
+                <!-- Card 3 -->
                 <div class="group gold-shadow rounded-lg overflow-hidden transition duration-300 hover:shadow-xl">
                     <div class="relative h-80 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1626081063434-79a2169791b1?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Woodworker" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
@@ -161,9 +315,9 @@
         </div>
     </section>
 
-    <!-- How It Works Section -->
+
     <section id="how-it-works" class="py-24 bg-cream">
-        <div class="container mx-auto px-6 lg:px-8">
+        <div class="container mx-auto">
             <div class="text-center mb-20">
                 <h2 class="font-playfair text-4xl text-luxury-green mb-5">How Khdamly Works</h2>
                 <div class="w-24 h-1 bg-gold mx-auto"></div>
@@ -194,9 +348,9 @@
         </div>
     </section>
 
-    <!-- Featured Categories -->
+    <!-- Categories -->
     <section class="py-24 bg-white">
-        <div class="container mx-auto px-6 lg:px-8">
+        <div class="container mx-auto">
             <div class="text-center mb-20">
                 <h2 class="font-playfair text-4xl text-luxury-green mb-5">Artisan Categories</h2>
                 <div class="w-24 h-1 bg-gold mx-auto"></div>
@@ -252,7 +406,7 @@
 
     <!-- Testimonials -->
     <section class="py-24 bg-cream">
-        <div class="container mx-auto px-6 lg:px-8">
+        <div class="container mx-auto">
             <div class="text-center mb-20">
                 <h2 class="font-playfair text-4xl text-luxury-green mb-5">Client Testimonials</h2>
                 <div class="w-24 h-1 bg-gold mx-auto"></div>
@@ -290,22 +444,22 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- CTA -->
     <section class="py-24 bg-luxury-green text-white">
-        <div class="container mx-auto px-6 lg:px-8 text-center">
+        <div class="container mx-auto text-center">
             <h2 class="font-playfair text-4xl mb-8">Ready to Discover Exceptional Artisans?</h2>
             <p class="text-light-gold text-xl mb-10 max-w-2xl mx-auto">Join our community of art lovers and connect with master artisans who bring your vision to life.</p>
             <div class="flex flex-col md:flex-row gap-6 justify-center">
-                <a href="#" class="bg-gold hover:bg-light-gold text-luxury-green font-semibold py-3 px-10 rounded-md transition duration-300">Join as a Client</a>
-                <a href="#" class="border-2 border-gold text-gold hover:bg-gold hover:text-luxury-green font-semibold py-3 px-10 rounded-md transition duration-300">Join as an Artisan</a>
+                <a href="#" class="cta-primary rounded-md">Join as a Client</a>
+                <a href="#" class="cta-secondary rounded-md">Join as an Artisan</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-16">
-        <div class="container mx-auto px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 text-center md:text-left">
                 <div>
                     <h3 class="font-playfair text-2xl text-gold mb-5">Khdamly</h3>
                     <p class="text-gray-400">Connecting artisans with art lovers, preserving craftsmanship for generations to come.</p>
@@ -329,7 +483,7 @@
                 </div>
                 <div>
                     <h4 class="font-playfair text-xl text-gold mb-5">Follow Us</h4>
-                    <div class="flex space-x-5">
+                    <div class="flex space-x-5 justify-center md:justify-start">
                         <a href="#" class="text-gray-400 hover:text-gold transition duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
                         </a>
@@ -349,7 +503,6 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu Toggle -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
