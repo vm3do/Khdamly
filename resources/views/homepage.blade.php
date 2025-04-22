@@ -450,8 +450,8 @@
             <h2 class="font-playfair text-4xl mb-8">Ready to Discover Exceptional Artisans?</h2>
             <p class="text-light-gold text-xl mb-10 max-w-2xl mx-auto">Join our community of art lovers and connect with master artisans who bring your vision to life.</p>
             <div class="flex flex-col md:flex-row gap-6 justify-center">
-                <a href="#" class="cta-primary rounded-md">Join as a Client</a>
-                <a href="#" class="cta-secondary rounded-md">Join as an Artisan</a>
+                <a href="#" class="bg-gold hover:bg-light-gold text-luxury-green font-semibold py-3 px-8 rounded-md transition duration-300">Join as a Client</a>
+                <a href="#" class="border-2 border-gold text-gold hover:bg-gold hover:text-luxury-green font-semibold py-3 px-8 rounded-md transition duration-300">Join as an Artisan</a>
             </div>
         </div>
     </section>
