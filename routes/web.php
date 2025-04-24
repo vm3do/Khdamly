@@ -29,3 +29,11 @@ Route::get('/chat', function () {
 Route::get('/artisan-dashboard', function () {
     return view('artisan-dashboard');
 })->name('artisan-dashboard');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('auth.signup');
+})->name('register');
