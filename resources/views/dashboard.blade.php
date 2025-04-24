@@ -24,7 +24,7 @@
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12">
         <!-- Stats -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <!-- Total Users -->
+            <!-- Users -->
             <div class="bg-white rounded-2xl p-6 border-2 border-gold/20 shadow-lg shadow-gold/5">
                 <div class="flex items-center justify-between">
                     <div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <!-- Artisan Requests -->
+            <!-- Requests -->
             <div class="bg-white rounded-2xl p-6 border-2 border-gold/20 shadow-lg shadow-gold/5">
                 <div class="flex items-center justify-between">
                     <div>
@@ -90,7 +90,7 @@
         </div>
 
         <div class="grid grid-cols-1 gap-8">
-            <!-- Artisan Requests -->
+            <!-- Requests -->
             <div class="bg-white rounded-2xl p-6 border-2 border-gold/20 shadow-lg shadow-gold/5">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="font-playfair text-2xl text-luxury-green">Artisan Requests</h2>
