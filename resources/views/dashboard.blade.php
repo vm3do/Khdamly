@@ -276,11 +276,26 @@
             </div>
             <div class="swiper portfolio-swiper">
                 <div class="swiper-wrapper">
-                    <!-- Portfolio images hna -->
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1583244539570-2e9b0d0a0a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                            alt="Pottery Work" class="w-full h-[500px] object-cover rounded-xl">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1583244539570-2e9b0d0a0a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                            alt="Wood Carving" class="w-full h-[500px] object-cover rounded-xl">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1583244539570-2e9b0d0a0a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                            alt="Textile Art" class="w-full h-[500px] object-cover rounded-xl">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1583244539570-2e9b0d0a0a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                            alt="Metal Work" class="w-full h-[500px] object-cover rounded-xl">
+                    </div>
                 </div>
                 <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev text-luxury-green"></div>
+                <div class="swiper-button-next text-luxury-green"></div>
             </div>
         </div>
     </div>
