@@ -17,3 +17,7 @@ Route::get('/profile', function () {
 Route::get('/pprofile', function () {
     return view('user-profile');
 })->name('user-profile');
+
+Route::get('/chat', function () {
+    return view('chat');
+})->name('user-profile');
