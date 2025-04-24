@@ -24,7 +24,7 @@
     <section class="py-16">
         <div class="max-w-screen-xl px-4 sm:px-6 md:px-8 lg:px-12 mx-auto">
             <div class="bg-white rounded-xl shadow-[0_4px_6px_-1px_rgba(197,165,114,0.2),0_2px_4px_-1px_rgba(197,165,114,0.1)] p-8">
-                <!-- Header -->
+
                 <div class="flex flex-col md:flex-row gap-6 items-start md:items-center mb-8">
                     <h1 class="font-playfair text-4xl text-luxury-green">Discover Artisans</h1>
                     <div class="flex-1 w-full md:w-auto">
@@ -103,7 +103,7 @@
 
             <!-- Artisans -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Artisan Card 1 -->
+                <!-- Artisan 1 -->
                 <x-card
                     job="Master Potter"
                     name="Ali Br"
@@ -111,7 +111,7 @@
                     image="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
                 />
 
-                <!-- Artisan Card 2 -->
+                <!-- Artisan 2 -->
                 <x-card
                     job="Textile Artist"
                     name="Fatima Al"
@@ -119,7 +119,7 @@
                     image="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
                 />
 
-                <!-- Artisan Card 3 -->
+                <!-- Artisan 3 -->
                 <x-card
                     job="Wood Carver"
                     name="Youssef Ma"
