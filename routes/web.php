@@ -20,4 +20,8 @@ Route::get('/pprofile', function () {
 
 Route::get('/chat', function () {
     return view('chat');
-})->name('user-profile');
+})->name('chat');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
