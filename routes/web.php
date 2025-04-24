@@ -13,3 +13,7 @@ Route::get('/artisans', function () {
 Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
+
+Route::get('/pprofile', function () {
+    return view('user-profile');
+})->name('user-profile');
