@@ -30,6 +30,16 @@
                 </p>
             </div>
 
+            @if ($errors->any())
+                <div class="bg-red-500 text-white p-4 rounded-md">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach 
+                    </ul>
+                </div>
+            @endif
+
             <form class="mt-8 space-y-6" action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="rounded-md shadow-sm space-y-4">
@@ -38,12 +48,12 @@
                         <label class="block text-sm font-medium text-gray-700">I want to join as:</label>
                         <div class="flex items-center space-x-4">
                             <div class="flex items-center">
-                                <input id="client" name="user_type" type="radio" value="client" 
+                                <input id="client" name="role" type="radio" value="client" checked
                                     class="h-4 w-4 text-luxury-green focus:ring-luxury-green border-gold">
                                 <label for="client" class="ml-2 block text-sm text-gray-700">Client</label>
                             </div>
                             <div class="flex items-center">
-                                <input id="artisan" name="user_type" type="radio" value="artisan" 
+                                <input id="artisan" name="role" type="radio" value="artisan" 
                                     class="h-4 w-4 text-luxury-green focus:ring-luxury-green border-gold">
                                 <label for="artisan" class="ml-2 block text-sm text-gray-700">Artisan</label>
                             </div>
@@ -53,25 +63,25 @@
                     <!-- Information -->
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                        <input id="name" name="name" type="text" required 
+                        <input id="name" name="name" type="text" value="{{old('name')}}" required 
                             class="appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-gold/20 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-luxury-green focus:border-luxury-green focus:z-10 sm:text-sm">
                     </div>
 
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                        <input id="email" name="email" type="email" required 
+                        <input id="email" name="email" type="email" value="{{old('email')}}" required 
                             class="appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-gold/20 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-luxury-green focus:border-luxury-green focus:z-10 sm:text-sm">
                     </div>
 
                     <div>
                         <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                        <input id="phone" name="phone" type="tel" required 
+                        <input id="phone" name="phone" type="tel" value="{{old('phone')}}" required 
                             class="appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-gold/20 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-luxury-green focus:border-luxury-green focus:z-10 sm:text-sm">
                     </div>
 
                     <div>
                         <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                        <select id="city" name="city" required 
+                        <select id="city" name="city" value="{{old('city')}}" required 
                             class="appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-gold/20 text-gray-900 focus:outline-none focus:ring-luxury-green focus:border-luxury-green focus:z-10 sm:text-sm">
                             <option value="">Select your city</option>
                             <option value="riyadh">Casa</option>
@@ -96,7 +106,7 @@
                     <div id="artisan-fields" class="hidden space-y-4">
                         <div>
                             <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                            <select id="category" name="category" 
+                            <select id="category" name="category"  value="{{old('category')}}"
                                 class="appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-gold/20 text-gray-900 focus:outline-none focus:ring-luxury-green focus:border-luxury-green focus:z-10 sm:text-sm">
                                 <option value="">Select your category</option>
                                 <option value="pottery">Pottery</option>
@@ -121,7 +131,7 @@
                                         <p class="pl-1">or drag and drop</p>
                                     </div>
                                     <p class="text-xs text-gray-500">
-                                        PNG, JPG, GIF up to 10MB (3-5 files required)
+                                        PNG, JPG up to 10MB (3-5 files required)
                                     </p>
                                 </div>
                             </div>
@@ -130,7 +140,7 @@
 
                         <div>
                             <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
-                            <textarea id="bio" name="bio" rows="3" 
+                            <textarea id="bio" name="bio" value="{{old('bio')}}" rows="3" 
                                 class="appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-gold/20 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-luxury-green focus:border-luxury-green focus:z-10 sm:text-sm"></textarea>
                         </div>
                     </div>

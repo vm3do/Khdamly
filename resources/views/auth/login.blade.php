@@ -30,12 +30,22 @@
                 </p>
             </div>
 
+            @if ($errors->any())
+                <div class="bg-red-500 text-white p-4 rounded-md">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach 
+                    </ul>
+                </div>
+            @endif
+
             <form class="mt-8 space-y-6" action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="rounded-md shadow-sm space-y-4">
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                        <input id="email" name="email" type="email" required 
+                        <input id="email" name="email" type="email" value="{{old('email')}}" required 
                             class="appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-gold/20 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-luxury-green focus:border-luxury-green focus:z-10 sm:text-sm">
                     </div>
 
