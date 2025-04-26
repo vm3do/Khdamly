@@ -23,6 +23,7 @@ class User extends Authenticatable
         'role',
         'category_id',
         'bio',
+        'is_blocked',
         'city', 
     ];
 
