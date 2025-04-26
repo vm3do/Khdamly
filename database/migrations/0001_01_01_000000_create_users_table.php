@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('role', ['client', 'artisan']);
-            $table->string('category')->constrained('categories');
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null');
             $table->text('bio');
             $table->string('city');
             $table->timestamp('email_verified_at')->nullable();

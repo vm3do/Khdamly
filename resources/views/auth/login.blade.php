@@ -18,6 +18,7 @@
 </head>
 
 <body class="bg-cream font-montserrat text-gray-800">
+    @include('components.header')
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
             <div class="text-center">
@@ -81,5 +82,6 @@
             </form>
         </div>
     </div>
+    @include('components.footer')
 </body>
 </html> 

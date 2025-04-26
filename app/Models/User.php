@@ -21,11 +21,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'category',
+        'category_id',
         'bio',
-        'portfolio',
-        'city',
-        
+        'city', 
     ];
 
     /**
