@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('portfolios', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('artisan_id')->constrained('users')->onDelete('cascade');
+            $table->string('image_path');
             $table->timestamps();
         });
     }

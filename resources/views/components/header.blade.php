@@ -23,13 +23,37 @@
                 </a>
             </nav>
             
-            <!-- CTA -->
             <div class="hidden lg:flex items-center space-x-6">
-                <a href="{{ route('login') }}"
-                    class="text-luxury-green hover:text-light-green font-medium transition duration-300">Sign In</a>
-                <a href="{{ route('register') }}"
-                    class="bg-luxury-green hover:bg-light-green text-white font-medium py-2 px-5 rounded-md transition duration-300">Join
-                    Now</a>
+                @auth
+                    <a href="{{ route('chat') }}" class="text-gray-700 hover:text-luxury-green transition duration-300 relative">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </a>
+
+                    <a href="#" class="text-gray-700 hover:text-luxury-green transition duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </a>
+
+                    <form action="{{ route('logout') }}" method="POST" class="flex items-center">
+                        @csrf
+                        <button type="submit" class="text-gray-700 hover:text-luxury-green transition duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                            </svg>
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="text-luxury-green hover:text-light-green font-medium transition duration-300">Sign In</a>
+                    <a href="{{ route('register') }}"
+                        class="bg-luxury-green hover:bg-light-green text-white font-medium py-2 px-5 rounded-md transition duration-300">Join
+                        Now</a>
+                @endauth
             </div>
             
             <!-- Hamburger -->
@@ -59,19 +83,40 @@
                     <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <div class="flex flex-col space-y-3 pt-3 border-t border-gray-200">
-                    <a href="{{route('login')}}" class="relative text-luxury-green hover:text-light-green font-medium transition duration-300 group">
-                        Sign In
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="{{route('register')}}" class="bg-luxury-green hover:bg-light-green text-white font-medium py-2 px-5 rounded-md transition duration-300 text-center">
-                        Join Now
-                    </a>
-                    <form action="{{route('logout')}}" method="POST" class="relative text-luxury-green hover:text-light-green font-medium transition duration-300 group">
-                        @csrf
-                        <button type="submit" class="w-full text-left">
-                            Log Out
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
-                    </form>
+                    @auth
+                        <a href="{{ route('chat') }}" class="flex items-center gap-2 text-gray-700 hover:text-luxury-green font-medium transition duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            Messages
+                            <span class="bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-2 text-gray-700 hover:text-luxury-green font-medium transition duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            Settings
+                        </a>
+                        <form action="{{route('logout')}}" method="POST" class="relative text-luxury-green hover:text-light-green font-medium transition duration-300 group">
+                            @csrf
+                            <button type="submit" class="w-full text-left flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                </svg>
+                                Log Out
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{route('login')}}" class="relative text-luxury-green hover:text-light-green font-medium transition duration-300 group">
+                            Sign In
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="{{route('register')}}" class="bg-luxury-green hover:bg-light-green text-white font-medium py-2 px-5 rounded-md transition duration-300 text-center">
+                            Join Now
+                        </a>
+                    @endauth
                 </div>
             </nav>
         </div>

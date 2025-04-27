@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('role', ['client', 'artisan']);
+            $table->enum('role', ['client', 'artisan', 'admin'])->default('client');
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null');
-            $table->text('bio');
-            $table->string('city');
+            $table->text('bio')->nullable();
+            $table->string('city')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_blocked')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
