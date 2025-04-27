@@ -15,9 +15,10 @@ class ArtisanController extends Controller
         $artisans = User::where('role', 'artisan')
         ->withAvg('reviews', 'rating')
         ->orderByDesc('reviews_avg_rating')
+        ->with(['category'])
         ->get();
-        dd($artisans->toArray());
-        return view('artisans');
+        // dd($artisans->toArray());
+        return view('artisans', compact('artisans'));
     }
 
     /**

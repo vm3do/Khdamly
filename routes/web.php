@@ -27,7 +27,7 @@ Route::get('/settings', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('artisan.settings.password');
+})->name('dashboard');
 
 Route::get('/artisan-dashboard', function () {
     return view('artisan-dashboard');
