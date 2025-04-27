@@ -55,14 +55,13 @@ class User extends Authenticatable
         return $this->belongsTo(Category::class);
     }
 
-    public function reviews()
+    public function artisanReviews()
     {
         return $this->hasMany(Review::class, 'artisan_id');
     }
-
-    public function requests()
+    public function clientReviews()
     {
-        return $this->hasMany(Request::class);
+        return $this->hasMany(Review::class, 'client_id');
     }
 
     public function portfolio()

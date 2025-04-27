@@ -77,12 +77,6 @@
                     </div>
 
                     <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                        <input id="phone" name="phone" type="tel" value="{{ old('phone') }}" required
-                            class="appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-gold/20 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-luxury-green focus:border-luxury-green focus:z-10 sm:text-sm">
-                    </div>
-
-                    <div>
                         <label for="city" class="block text-sm font-medium text-gray-700">City</label>
                         <select id="city" name="city" required
                             class="appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-gold/20 text-gray-900 focus:outline-none focus:ring-luxury-green focus:border-luxury-green focus:z-10 sm:text-sm">

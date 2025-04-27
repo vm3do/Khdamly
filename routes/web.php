@@ -4,9 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtisanController;
 
-Route::get('/', function () {
-    return view('homepage');
-});
 
 Route::get('/profile', function () {
     return view('profile');
@@ -35,10 +32,10 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('show.regsiter');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
-
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
+Route::get('/', [ArtisanController::class,'homepage'])->name('homepage');
 Route::get('/artisans', [ArtisanController::class,'index'])->name('artisans');
 Route::get('/artisan/{id}', [ArtisanController::class, 'show'])->name('artisan.show');
 Route::put('/artisan/{id}', [ArtisanController::class, 'update'])->name('artisan.update');

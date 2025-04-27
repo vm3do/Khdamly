@@ -10,6 +10,16 @@ class ArtisanController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function homepage(){
+        $artisans = User::where('role', 'artisan')
+        ->withAvg('reviews', 'rating')
+        ->orderByDesc('reviews_avg_rating')
+        ->with(['category'])->limit(3)->get();
+        dd($artisans->toArray());
+        return view('homepage', compact('artisans'));
+    }
+
     public function index()
     {
         $artisans = User::where('role', 'artisan')
