@@ -103,52 +103,22 @@
 
             <!-- Artisans -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Artisan 1 -->
-                <x-card
-                    job="Master Potter"
-                    name="Ali Br"
-                    description="Crafting exquisite pottery with traditional techniques passed down through generations. Each piece tells a story of heritage and craftsmanship."
-                    image="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                />
 
-                <!-- Artisan 2 -->
                 @foreach ($artisans as $artisan)
                     <x-card
                         job="{{ $artisan->category->name }}"
                         name="{{ $artisan->name }}"
                         description="{{ $artisan->bio }}"
                         image="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                        link="{{route('artisan.show', $artisan->id)}}"
                     />
                 @endforeach
 
-                <!-- Artisan 3 -->
-                <x-card
-                    job="Wood Carver"
-                    name="Youssef Ma"
-                    description="Mastering the art of wood carving with precision and passion. Transforming raw wood into intricate works of art."
-                    image="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                />
             </div>
 
             <!-- Pagination -->
-            <div class="flex justify-center mt-12">
-                <nav class="flex items-center space-x-2">
-                    <a href="#" class="px-4 py-2 border-2 border-gold/20 rounded-lg text-gray-600 hover:border-gold hover:text-luxury-green transition duration-300">
-                        Previous
-                    </a>
-                    <a href="#" class="px-4 py-2 border-2 border-gold rounded-lg text-luxury-green">
-                        1
-                    </a>
-                    <a href="#" class="px-4 py-2 border-2 border-gold/20 rounded-lg text-gray-600 hover:border-gold hover:text-luxury-green transition duration-300">
-                        2
-                    </a>
-                    <a href="#" class="px-4 py-2 border-2 border-gold/20 rounded-lg text-gray-600 hover:border-gold hover:text-luxury-green transition duration-300">
-                        3
-                    </a>
-                    <a href="#" class="px-4 py-2 border-2 border-gold/20 rounded-lg text-gray-600 hover:border-gold hover:text-luxury-green transition duration-300">
-                        Next
-                    </a>
-                </nav>
+            <div class="mt-12">
+                {{ $artisans->links() }}
             </div>
         </div>
     </section>

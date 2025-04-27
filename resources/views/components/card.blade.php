@@ -12,6 +12,7 @@
     <div class="flex flex-col flex-grow p-6">
         <div class="flex items-center justify-between mb-4">
             <h3 class="font-playfair text-xl text-luxury-green">{{$name}}</h3>
+
             <div class="flex items-center">
                 <div class="flex">
                     <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
@@ -41,7 +42,7 @@
         <p class="text-gray-600 text-sm mb-6 line-clamp-3">Crafting exquisite pottery with traditional
             {{$description}}.</p>
         <div class="mt-auto">
-            <a href="#"
+            <a href="{{$link}}"
                 class="inline-flex items-center text-luxury-green hover:text-light-green font-medium text-sm transition-colors duration-300">
                 View Profile
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1" fill="none" viewBox="0 0 24 24"

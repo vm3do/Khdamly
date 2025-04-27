@@ -66,13 +66,13 @@
                             <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                         </svg>
                     </div>
-                    <p class="text-gold text-lg sm:text-xl font-cormorant">Master Potter</p>
+                    <p class="text-gold text-lg sm:text-xl font-cormorant">{{$artisan->category->name}}</p>
                     <div class="flex items-center justify-center gap-2 text-gray-500">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
-                        <span class="text-sm">Marrakech, Morocco</span>
+                        <span class="text-sm">{{$artisan->city}}, Morocco</span>
                     </div>
                     
                     <!-- Stats -->
@@ -85,7 +85,7 @@
                             <span class="text-gray-500">(48)</span>
                         </div>
                         <div class="h-4 w-px bg-gray-300"></div>
-                        <div class="text-gray-500">Joined April 2023</div>
+                        <div class="text-gray-500">Joined {{$artisan->created_at->format('F Y')}}</div>
                     </div>
 
                     <!-- Call to Action -->
@@ -112,10 +112,7 @@
                 <h2 class="font-playfair text-3xl sm:text-4xl text-luxury-green mb-8 text-center">About the Artisan</h2>
                 <div class="prose max-w-2xl mx-auto">
                     <p class="text-gray-600 leading-relaxed mb-8 text-lg sm:text-xl text-center">
-                        With over 20 years of experience in traditional pottery, I specialize in creating unique pieces that blend ancient Moroccan techniques with contemporary design. Each piece is handcrafted with meticulous attention to detail, using locally sourced clay and natural glazes.
-                    </p>
-                    <p class="text-gray-600 leading-relaxed text-lg sm:text-xl text-center">
-                        My work has been featured in several international exhibitions, and I've had the privilege of teaching pottery workshops to preserve these traditional techniques for future generations.
+                        {{$artisan->bio}}
                     </p>
                 </div>
             </div>

@@ -8,8 +8,6 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-Route::get('/artisans', [ArtisanController::class,'index'])->name('artisans');
-
 Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
@@ -39,3 +37,13 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::get('/artisans', [ArtisanController::class,'index'])->name('artisans');
+Route::get('/artisan/{id}', [ArtisanController::class, 'show'])->name('artisan.show');
+Route::put('/artisan/{id}', [ArtisanController::class, 'update'])->name('artisan.update');
+Route::delete('/artisan/{id}', [ArtisanController::class, 'destroy'])->name('artisan.destroy');
+Route::get('/artisan/{id}/portfolio', [ArtisanController::class, 'portfolio'])->name('artisan.portfolio');
+Route::post('/artisan/{id}/portfolio', [ArtisanController::class, 'storePortfolio'])->name('artisan.portfolio.store');
+Route::delete('/artisan/{id}/portfolio/{portfolioId}', [ArtisanController::class, 'destroyPortfolio'])->name('artisan.portfolio.destroy');
+

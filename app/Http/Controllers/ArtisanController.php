@@ -15,34 +15,19 @@ class ArtisanController extends Controller
         $artisans = User::where('role', 'artisan')
         ->withAvg('reviews', 'rating')
         ->orderByDesc('reviews_avg_rating')
-        ->with(['category'])
-        ->get();
+        ->with(['category'])->paginate(6);
         // dd($artisans->toArray());
         return view('artisans', compact('artisans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $artisan = User::where('role', 'artisan')->findOrFail($id);
+        $artisan->load(['category', 'reviews.client']);
+        $artisan->loadAvg('reviews', 'rating');
+        $artisan->loadCount('messages');
+
+        return view('profile', compact('artisan'));
     }
 
     /**
