@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ArtisanController extends Controller
@@ -11,6 +12,11 @@ class ArtisanController extends Controller
      */
     public function index()
     {
+        $artisans = User::where('role', 'artisan')
+        ->withAvg('reviews', 'rating')
+        ->orderByDesc('reviews_avg_rating')
+        ->get();
+        dd($artisans->toArray());
         return view('artisans');
     }
 

@@ -24,7 +24,7 @@ class User extends Authenticatable
         'category_id',
         'bio',
         'is_blocked',
-        'city', 
+        'city',
     ];
 
     /**
@@ -48,5 +48,35 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'artisan_id');
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(Request::class);
+    }
+
+    public function portfolio()
+    {
+        return $this->hasMany(Portfolio::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
     }
 }

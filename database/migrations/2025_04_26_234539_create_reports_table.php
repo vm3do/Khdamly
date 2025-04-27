@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('reporter_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('reported_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('report_categories')->onDelete('cascade');
+            $table->text('description')->nullable();
+            $table->string('image_path')->nullable();
+            $table->enum('status', ['pending', 'resolved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

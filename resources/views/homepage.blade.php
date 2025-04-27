@@ -227,9 +227,9 @@
             </div>
             
             <div class="text-center mt-16">
-                <a href="#"
+                <a href="{{route('artisans')}}"
                     class="inline-block border-2 border-luxury-green text-luxury-green hover:bg-luxury-green hover:text-white font-semibold py-3 px-10 rounded-md transition duration-300">View
-                    All Artisans</a>
+                All Artisans</a>
             </div>
         </div>
     </section>
