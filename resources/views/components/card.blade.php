@@ -6,41 +6,39 @@
             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-6">
-            <p class="text-light-gold font-montserrat text-sm">{{$job}}</p>
+            <p class="text-light-gold font-montserrat text-sm">{{ $job }}</p>
         </div>
     </div>
     <div class="flex flex-col flex-grow p-6">
         <div class="flex items-center justify-between mb-4">
-            <h3 class="font-playfair text-xl text-luxury-green">{{$name}}</h3>
+            <h3 class="font-playfair text-xl text-luxury-green">{{ $name }}</h3>
 
             <div class="flex items-center">
                 <div class="flex">
                     @php
-    $rating = $rating ?? 0;
-@endphp
+                        $rating = $rating ?? 0;
+                    @endphp
                     @for ($i = 1; $i <= 5; $i++)
                         @if ($i <= $rating)
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-luxury-green" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M11.049 2.927C11.469 1.107 12.531 1.107 12.951 2.927L14.5 7h4.5c1.8 0 2.55 2.3 1.1 3.4l-3.6 2.6L17 18c0 .8-.7 1-1.2.6L12 16l-3.8 2.6C7.7 19 7 18.8 7 18l1-4.9L4.5 10c-1.5-1-1-3.4 1-3.4h4l1.5-4z" />
+                            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                             </svg>
                         @else
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-300" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M11.049 2.927C11.469 1.107 12.531 1.107 12.951 2.927L14.5 7h4.5c1.8 0 2.55 2.3 1.1 3.4l-3.6 2.6L17 18c0 .8-.7 1-1.2.6L12 16l-3.8 2.6C7.7 19 7 18.8 7 18l1-4.9L4.5 10c-1.5-1-1-3.4 1-3.4h4l1.5-4z" />
-                            </svg>
+                        <svg class="w-4 h-4 text-light-gold" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
                         @endif
-                    @endfor 
+                    @endfor
                 </div>
-                <span class="ml-1 text-light-gold text-xs">(48)</span>
+                <span class="ml-1 text-gold text-xs">({{$count}})</span>
             </div>
         </div>
         <p class="text-gray-600 text-sm mb-6 line-clamp-3">Crafting exquisite pottery with traditional
-            {{$description}}.</p>
+            {{ $description }}.</p>
         <div class="mt-auto">
-            <a href="{{$link}}"
+            <a href="{{ $link }}"
                 class="inline-flex items-center text-luxury-green hover:text-light-green font-medium text-sm transition-colors duration-300">
                 View Profile
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1" fill="none" viewBox="0 0 24 24"

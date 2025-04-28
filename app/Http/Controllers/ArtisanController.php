@@ -14,6 +14,7 @@ class ArtisanController extends Controller
     public function homepage(){
         $artisans = User::where('role', 'artisan')
         ->withAvg('artisanReviews as rating', 'rating')
+        ->withCount('artisanReviews as reviews_count')
         ->orderByDesc('rating')
         ->with(['category'])->limit(3)->get();
         // dd($artisans->toArray());
