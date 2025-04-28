@@ -13,18 +13,18 @@ class ArtisanController extends Controller
 
     public function homepage(){
         $artisans = User::where('role', 'artisan')
-        ->withAvg('reviews', 'rating')
-        ->orderByDesc('reviews_avg_rating')
+        ->withAvg('artisanReviews as rating', 'rating')
+        ->orderByDesc('rating')
         ->with(['category'])->limit(3)->get();
-        dd($artisans->toArray());
+        // dd($artisans->toArray());
         return view('homepage', compact('artisans'));
     }
 
     public function index()
     {
         $artisans = User::where('role', 'artisan')
-        ->withAvg('reviews', 'rating')
-        ->orderByDesc('reviews_avg_rating')
+        ->withAvg('artisanReviews as rating', 'rating')
+        ->orderByDesc('rating')
         ->with(['category'])->paginate(6);
         // dd($artisans->toArray());
         return view('artisans', compact('artisans'));
@@ -33,8 +33,8 @@ class ArtisanController extends Controller
     public function show(string $id)
     {
         $artisan = User::where('role', 'artisan')->findOrFail($id);
-        $artisan->load(['category', 'reviews.client']);
-        $artisan->loadAvg('reviews', 'rating');
+        $artisan->load(['category', 'artisanReviews.client']);
+        $artisan->loadAvg('ArtisanReviews as rating', 'rating');
         $artisan->loadCount('messages');
 
         return view('profile', compact('artisan'));

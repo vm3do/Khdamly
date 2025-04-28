@@ -15,8 +15,11 @@
 
             <div class="flex items-center">
                 <div class="flex">
-                    @for ($i = 0; $i < 5; $i++)
-                        @if ($i < $rating)
+                    @php
+    $rating = $rating ?? 0;
+@endphp
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $rating)
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-luxury-green" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -29,8 +32,7 @@
                                     d="M11.049 2.927C11.469 1.107 12.531 1.107 12.951 2.927L14.5 7h4.5c1.8 0 2.55 2.3 1.1 3.4l-3.6 2.6L17 18c0 .8-.7 1-1.2.6L12 16l-3.8 2.6C7.7 19 7 18.8 7 18l1-4.9L4.5 10c-1.5-1-1-3.4 1-3.4h4l1.5-4z" />
                             </svg>
                         @endif
-                    @endfor
-                    
+                    @endfor 
                 </div>
                 <span class="ml-1 text-light-gold text-xs">(48)</span>
             </div>
