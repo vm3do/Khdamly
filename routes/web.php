@@ -4,11 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtisanController;
 use App\Http\Controllers\RequestController;
-
-
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
+use App\Http\Controllers\ReviewController;
 
 Route::get('/pprofile', function () {
     return view('user-profile');
@@ -29,13 +25,14 @@ Route::get('/artisan-dashboard', function () {
     return view('artisan-dashboard');
 })->name('artisan-dashboard');
 
+//authentification
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('show.regsiter');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
+//artisans
 Route::get('/', [ArtisanController::class,'homepage'])->name('homepage');
 Route::get('/artisans', [ArtisanController::class,'index'])->name('artisans');
 Route::get('/artisan/{id}', [ArtisanController::class, 'show'])->name('artisan.show');
@@ -45,5 +42,11 @@ Route::get('/artisan/{id}/portfolio', [ArtisanController::class, 'portfolio'])->
 Route::post('/artisan/{id}/portfolio', [ArtisanController::class, 'storePortfolio'])->name('artisan.portfolio.store');
 Route::delete('/artisan/{id}/portfolio/{portfolioId}', [ArtisanController::class, 'destroyPortfolio'])->name('artisan.portfolio.destroy');
 
+//requests
 Route::post('/artisan/{id}/request', [RequestController::class, 'store'])->name('artisan.request');
+
+//reviews
+Route::post('/review}', [ReviewController::class, 'store'])->name('review.store');
+
+
 

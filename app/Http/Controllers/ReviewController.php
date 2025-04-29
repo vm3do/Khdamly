@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -27,7 +28,16 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'artisan_id' => 'required|exists:users,id',
+            'rating' => 'required|numeric|min:1|max:5',
+            'review' => 'required|string|max:255|min:10',
+        ]);
+
+        $validated['client_id'] = auth()->id;
+
+        Review::create($validated);
+        return back()->with('success', 'Review created successfully.');
     }
 
     /**

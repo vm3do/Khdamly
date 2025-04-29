@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Request as RequestModel;
 
@@ -10,8 +11,11 @@ class RequestController extends Controller
     public function store(Request $request, string $id)
     {
         // dd($request->all());
+        User::where('role', 'artisan')->where('is_blocked', false)->findOrFail($id);
+        $request->merge(['artisan_id' => $id]);
         $validated = $request->validate([
-            'artisan_id' => 'required|exists:users,id',
+            'artisan_id' => 'required|int',
+            'title' => 'required|string|max:255|min:2',
             'description' => 'required|string|max:255|min:10',
             'budget' => 'required|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -23,7 +27,7 @@ class RequestController extends Controller
             $validated['image'] = $request->file('image')->store('requests', 'public');
         }
 
-        $request = RequestModel::create($validated);
+        RequestModel::create($validated);
         return back()->with('success', 'Request created successfully.');
     }
 
