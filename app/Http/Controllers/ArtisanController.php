@@ -11,12 +11,13 @@ class ArtisanController extends Controller
      * Display a listing of the resource.
      */
 
-    public function homepage(){
+    public function homepage()
+    {
         $artisans = User::where('role', 'artisan')
-        ->withAvg('artisanReviews as rating', 'rating')
-        ->withCount('artisanReviews as reviews_count')
-        ->orderByDesc('rating')
-        ->with(['category'])->limit(3)->get();
+            ->withAvg('artisanReviews as rating', 'rating')
+            ->withCount('artisanReviews as reviews_count')
+            ->orderByDesc('rating')
+            ->with(['category'])->limit(3)->get();
         // dd($artisans->toArray());
         return view('homepage', compact('artisans'));
     }
@@ -24,9 +25,10 @@ class ArtisanController extends Controller
     public function index()
     {
         $artisans = User::where('role', 'artisan')
-        ->withAvg('artisanReviews as rating', 'rating')
-        ->orderByDesc('rating')
-        ->with(['category'])->paginate(6);
+            ->withAvg('artisanReviews as rating', 'rating')
+            ->orderByDesc('rating')
+            ->withCount('artisanReviews as reviews_count')
+            ->with(['category'])->paginate(6);
         // dd($artisans->toArray());
         return view('artisans', compact('artisans'));
     }
@@ -34,11 +36,14 @@ class ArtisanController extends Controller
     public function show(string $id)
     {
         $artisan = User::where('role', 'artisan')->findOrFail($id);
-        $artisan->load(['category', 'artisanReviews.client', 'portfolio']);
-        $artisan->loadAvg('ArtisanReviews as rating', 'rating');
+        $artisan->load(['category', 'portfolio']);
+        $artisan->loadAvg('artisanReviews as rating', 'rating');
         $artisan->loadCount('messages');
 
-        return view('profile', compact('artisan'));
+        // dd($artisan->toArray());
+        $reviews = $artisan->artisanReviews()->with('client')->paginate(4);
+
+        return view('profile', compact('artisan', 'reviews'));
     }
 
     /**

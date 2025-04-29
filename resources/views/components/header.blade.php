@@ -2,7 +2,7 @@
     <div class="max-w-screen-xl px-4 sm:px-6 md:px-8 lg:px-12 mx-auto">
         <div class="flex justify-between items-center py-5">
             <!-- Logo -->
-            <a href="#" class="flex items-center gap-2">
+            <a href="/" class="flex items-center gap-2">
                 <img class="w-8" src="{{ asset('images/logo.svg') }}" alt="Khdamly">
                 <p class="font-playfair text-[#D09A45]">KHDAMLY</p>
             </a>

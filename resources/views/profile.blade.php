@@ -61,7 +61,7 @@
                 <!-- Profile Info -->
                 <div class="text-center mt-6 space-y-3">
                     <div class="flex items-center justify-center gap-2">
-                        <h1 class="font-playfair text-3xl sm:text-4xl text-gray-800">Ali Br</h1>
+                        <h1 class="font-playfair text-3xl sm:text-4xl text-gray-800">{{$artisan->name}}</h1>
                         <svg class="w-6 h-6 text-gold" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                         </svg>
@@ -167,9 +167,10 @@
                     Write a Review
                 </button>
             </div>
-
+            {{-- {{dd($artisan->toArray())}} --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Review 1 -->
+                <!-- Reviews -->
+                @foreach ($reviews as $review)
                 <div class="bg-cream rounded-2xl p-6 shadow-lg">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-12 h-12 rounded-full overflow-hidden">
@@ -177,40 +178,22 @@
                                 alt="Client" class="w-full h-full object-cover">
                         </div>
                         <div>
-                            <h4 class="font-medium text-gray-800">Sarah Johnson</h4>
+                            <h4 class="font-medium text-gray-800">{{$review->client->name}}</h4>
                             <div class="flex items-center gap-1">
                                 <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
-                                <span class="text-sm text-gray-600">5.0</span>
+                                <span class="text-sm text-gray-600">{{$review->rating}}.0</span>
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-600 italic mb-4">"Absolutely stunning craftsmanship! The vase I ordered exceeded my expectations. The attention to detail and quality of materials is exceptional."</p>
+                    <p class="text-gray-600 italic mb-4">"{{$review->comment}}"</p>
                     <p class="text-sm text-gray-500">Purchased: Traditional Vase</p>
                 </div>
-
-                <!-- Review 2 -->
-                <div class="bg-cream rounded-2xl p-6 shadow-lg">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 rounded-full overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                                alt="Client" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-medium text-gray-800">Michael Chen</h4>
-                            <div class="flex items-center gap-1">
-                                <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <span class="text-sm text-gray-600">4.5</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic mb-4">"The tea set is not only beautiful but also functional. The craftsmanship is impeccable, and the gold accents add a touch of luxury to my dining table."</p>
-                    <p class="text-sm text-gray-500">Purchased: Tea Set</p>
-                </div>
+                @endforeach
+            
             </div>
+            <div class="mt-12">{{$reviews->links()}}</div>
         </div>
     </section>
 
