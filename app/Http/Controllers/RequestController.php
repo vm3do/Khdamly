@@ -7,12 +7,12 @@ use App\Models\Request as RequestModel;
 
 class RequestController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
-        dd($request->all());
+        // dd($request->all());
         $validated = $request->validate([
             'artisan_id' => 'required|exists:users,id',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string|max:255|min:10',
             'budget' => 'required|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -20,7 +20,7 @@ class RequestController extends Controller
         $validated['client_id'] = auth()->id;
 
         if ($request->hasFile('image')) {
-            $validated['image_path'] = $request->file('image')->store('requests', 'public');
+            $validated['image'] = $request->file('image')->store('requests', 'public');
         }
 
         $request = RequestModel::create($validated);
@@ -29,7 +29,7 @@ class RequestController extends Controller
 
     public function show(string $id)
     {
-        //
+        
     }
 
     /**

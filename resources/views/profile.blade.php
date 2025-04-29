@@ -26,29 +26,18 @@
     @if ($errors->any())
         <div class="fixed top-4 right-4 z-50">
             <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-lg max-w-md">
-                <div class="flex">
-                    <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                <div class="flex items-center gap-3">
+                    <svg class="h-5 w-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <div class="flex-1">
+                        <p class="text-sm text-red-700">{{ $errors->first() }}</p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.parentElement.remove()" class="text-red-500 hover:text-red-700">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
-                    </div>
-                    <div class="ml-3">
-                        <h3 class="text-sm font-medium text-red-800">There were some errors with your submission</h3>
-                        <div class="mt-2 text-sm text-red-700">
-                            <ul class="list-disc pl-5 space-y-1">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="ml-auto pl-3">
-                        <button onclick="this.parentElement.parentElement.remove()" class="text-red-500 hover:text-red-700">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        </button>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -57,22 +46,18 @@
     @if(session('success'))
         <div class="fixed top-4 right-4 z-50">
             <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg shadow-lg max-w-md">
-                <div class="flex">
-                    <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                <div class="flex items-center gap-3">
+                    <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <div class="flex-1">
+                        <p class="text-sm text-green-800">{{ session('success') }}</p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.parentElement.remove()" class="text-green-500 hover:text-green-700">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-green-800">{{ session('success') }}</p>
-                    </div>
-                    <div class="ml-auto pl-3">
-                        <button onclick="this.parentElement.parentElement.remove()" class="text-green-500 hover:text-green-700">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        </button>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -173,7 +158,8 @@
                 </button>
             </div>
             
-            <form  action="{{route('artisan.request', $artisan->id)}}" method="POST"  class="space-y-6">
+            <form  action="{{route('artisan.request', $artisan->id)}}" method="post"  class="space-y-6">
+                @csrf
                 <div>
                     <label class="block text-gray-700 mb-2">Description</label>
                     <textarea name="description" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" rows="4" placeholder="Describe your request in detail..."></textarea>
@@ -280,13 +266,33 @@
     <!-- Reviews -->
     <section class="py-20 bg-white">
         <div class="max-w-screen-xl px-4 sm:px-6 md:px-8 lg:px-12 mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
-                <h2 class="font-playfair text-3xl text-luxury-green">Client Reviews</h2>
-                <button class="mt-4 md:mt-0 px-6 py-3 border-2 border-gold text-gold rounded-lg hover:bg-gold/5 transition duration-300">
-                    Write a Review
-                </button>
-            </div>
-            {{-- {{dd($artisan->toArray())}} --}}
+            <h2 class="font-playfair text-3xl text-luxury-green mb-8">Client Reviews</h2>
+            
+            <form action="{{route('artisans', $artisan->id)}}" method="POST" class="mb-12">
+                @csrf
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-2">
+                        <label class="text-gray-700">Your Rating:</label>
+                        <div class="flex items-center gap-1">
+                            @for($i = 1; $i <= 5; $i++)
+                                <button type="button" onclick="setRating({{$i}})" class="text-gold hover:text-gold/80 transition duration-300">
+                                    <svg class="w-6 h-6 rating-star" data-rating="{{$i}}" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                                    </svg>
+                                </button>
+                            @endfor
+                            <input type="hidden" name="rating" id="ratingInput" value="0">
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <textarea name="comment" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" rows="3" placeholder="Write your review..."></textarea>
+                        <button type="submit" class="px-6 py-2 bg-luxury-green text-white rounded-lg hover:bg-luxury-green/90 transition duration-300 self-end">
+                            Submit Review
+                        </button>
+                    </div>
+                </div>
+            </form>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Reviews -->
                 @foreach ($reviews as $review)
@@ -352,7 +358,28 @@
             }
         });
 
-       //modal 
+        function setRating(rating) {
+            const stars = document.querySelectorAll('.rating-star');
+            const ratingInput = document.getElementById('ratingInput');
+            
+            stars.forEach(star => {
+                const starRating = parseInt(star.dataset.rating);
+                if (starRating <= rating) {
+                    star.classList.add('text-gold');
+                    star.classList.remove('text-gray-300');
+                } else {
+                    star.classList.remove('text-gold');
+                    star.classList.add('text-gray-300');
+                }
+            });
+            
+            ratingInput.value = rating;
+        }
+
+        // stars as gray
+        document.querySelectorAll('.rating-star').forEach(star => {
+            star.classList.add('text-gray-300');
+        });
 
         function toggleModal() {
             const modal = document.getElementById('requestModal');

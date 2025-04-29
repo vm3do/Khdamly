@@ -11,7 +11,7 @@ class Request extends Model
         'client_id',
         'description',
         'status',
-        'price',
+        'budget',
         'image',
     ];
 
