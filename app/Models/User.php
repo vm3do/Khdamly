@@ -59,6 +59,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class, 'artisan_id');
     }
+
     public function clientReviews()
     {
         return $this->hasMany(Review::class, 'client_id');
@@ -66,7 +67,7 @@ class User extends Authenticatable
 
     public function portfolio()
     {
-        return $this->hasMany(Portfolio::class);
+        return $this->hasMany(Portfolio::class, 'artisan_id');
     }
 
     public function messages()

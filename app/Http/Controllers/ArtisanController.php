@@ -34,7 +34,7 @@ class ArtisanController extends Controller
     public function show(string $id)
     {
         $artisan = User::where('role', 'artisan')->findOrFail($id);
-        $artisan->load(['category', 'artisanReviews.client']);
+        $artisan->load(['category', 'artisanReviews.client', 'portfolio']);
         $artisan->loadAvg('ArtisanReviews as rating', 'rating');
         $artisan->loadCount('messages');
 

@@ -129,46 +129,11 @@
             <!-- Carousel -->
             <div class="swiper portfolio-swiper">
                 <div class="swiper-wrapper">
-                    <!-- Slide 1 -->
+                    
+                    @foreach ($artisan->portfolio as $portfolio)
                     <div class="swiper-slide">
                         <div class="group relative aspect-[16/9] rounded-3xl overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-160672259058-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                                alt="Pottery Work" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-700">
-                                <div class="absolute bottom-0 left-0 right-0 p-10">
-                                    <h3 class="text-white text-4xl font-playfair mb-3">Traditional Vase Collection</h3>
-                                    <p class="text-gold text-xl font-cormorant mb-6">Handcrafted with natural clay and traditional patterns</p>
-                                    <div class="flex items-center gap-3">
-                                        <span class="text-white/80 text-lg">Starting from</span>
-                                        <span class="text-gold font-medium text-2xl">$120</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 2 -->
-                    <div class="swiper-slide">
-                        <div class="group relative aspect-[16/9] rounded-3xl overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                                alt="Pottery Work" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-700">
-                                <div class="absolute bottom-0 left-0 right-0 p-10">
-                                    <h3 class="text-white text-4xl font-playfair mb-3">Decorative Bowl</h3>
-                                    <p class="text-gold text-xl font-cormorant mb-6">Traditional Moroccan patterns</p>
-                                    <div class="flex items-center gap-3">
-                                        <span class="text-white/80 text-lg">Starting from</span>
-                                        <span class="text-gold font-medium text-2xl">$85</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3 -->
-                    <div class="swiper-slide">
-                        <div class="group relative aspect-[16/9] rounded-3xl overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                            <img src="{{asset('storage/' . $portfolio->path)}}" 
                                 alt="Pottery Work" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-700">
                                 <div class="absolute bottom-0 left-0 right-0 p-10">
@@ -182,6 +147,7 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
                 <!-- Navigation -->
                 <div class="swiper-button-next text-gold"></div>

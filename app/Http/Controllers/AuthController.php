@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Portfolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -30,21 +31,31 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'city' => 'required|string|min:3|max:255',
             'role' => 'required|in:client,artisan',
-            'bio' => 'required|string|min:10|max:255'
+            'bio' => 'required|string|min:10|max:255',
         ];
         
         if ($request->role == 'artisan') {
             $rules['category_id'] = 'required|int|exists:categories,id';
-            // exists:categories,name
-            // $rules['portfolio'] = 'required|array|min:3';
-            // $rules['portfolio.*'] = 'required|image|mimes:jpeg,png,jpg|max:2048';
+            $rules['portfolio'] = 'required|array|min:3';
+            $rules['portfolio.*'] = 'required|image|mimes:jpeg,png,jpg|max:2048';
         }
 
+        // dd($validated = $request->validate($rules));
         $validated = $request->validate($rules);
 
         $user = User::create($validated);
+        // dd($user->toArray());
         Auth::login($user);
-        return redirect('/');
+        if ($request->role == 'artisan' && $request->hasFile('portfolio')) {
+            foreach($request->file('portfolio') as $portfolio){
+                $path = $portfolio->store('portfolios', 'public');
+                Portfolio::create([
+                    'artisan_id' => $user->id,
+                    'path' => $path,
+                ]);
+            }
+        }
+        return redirect('artisans');
     }
 
     public function login(Request $request){
