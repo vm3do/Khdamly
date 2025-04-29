@@ -27,7 +27,11 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'artisan_id' => 'required|exists:users,id',
+            'client_id' => 'required|exists:users,id',
+            'message' => 'required|string|max:255',
+        ]);
     }
 
     /**

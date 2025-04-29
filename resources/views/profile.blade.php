@@ -48,7 +48,7 @@
         </div>
     </section>
 
-    <!-- Profile Section -->
+    <!-- Profile -->
     <section class="relative -mt-16 px-4 sm:px-6 md:px-8 lg:px-12">
         <div class="max-w-3xl mx-auto">
             <div class="flex flex-col items-center">
@@ -90,7 +90,7 @@
 
                     <!-- Call to Action -->
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-6">
-                        <button class="w-full sm:w-auto px-8 py-3 bg-luxury-green text-white rounded-xl hover:bg-luxury-green/90 transition duration-300 flex items-center justify-center gap-2">
+                        <button onclick="toggleModal()" class="w-full sm:w-auto px-8 py-3 bg-luxury-green text-white rounded-xl hover:bg-luxury-green/90 transition duration-300 flex items-center justify-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
@@ -104,6 +104,69 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div id="requestModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 transform transition-all duration-300 scale-95 opacity-0" id="modalContent">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-playfair text-2xl text-luxury-green">Send Request</h3>
+                <button onclick="toggleModal()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <form class="space-y-6">
+                <div>
+                    <label class="block text-gray-700 mb-2">Description</label>
+                    <textarea class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" rows="4" placeholder="Describe your request in detail..."></textarea>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 mb-2">Minimum Price (MAD)</label>
+                    <input type="number" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter minimum price">
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 mb-2">Example Image (Optional)</label>
+                    <div class="border-2 border-dashed border-gold/20 rounded-lg p-6 text-center hover:border-gold transition duration-300">
+                        <input type="file" class="hidden" id="imageUpload" accept="image/*">
+                        <label for="imageUpload" class="cursor-pointer">
+                            <svg class="w-12 h-12 mx-auto text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <p class="mt-2 text-sm text-gray-500">Click to upload an example image</p>
+                        </label>
+                    </div>
+                    <!-- Preview -->
+                    <div id="filePreview" class="hidden mt-4">
+                        <div class="flex items-center gap-3 bg-cream border-2 border-gold/20 rounded-lg p-3">
+                            <img id="previewImage" src="" alt="Preview" class="w-12 h-12 object-cover rounded">
+                            <div class="flex-1">
+                                <p id="fileName" class="text-sm text-gray-800 truncate"></p>
+                                <p id="fileSize" class="text-xs text-gray-500"></p>
+                            </div>
+                            <button type="button" onclick="removeFile()" class="text-red-500 hover:text-red-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end gap-4">
+                    <button type="button" onclick="toggleModal()" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-6 py-2 bg-luxury-green text-white rounded-lg hover:bg-luxury-green/90 transition duration-300">
+                        Send Request
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- About -->
     <section class="py-16 px-4 sm:px-6 md:px-8 lg:px-12">
@@ -204,7 +267,6 @@
     <script>
         AOS.init();
 
-        //  Swiper
         const swiper = new Swiper('.portfolio-swiper', {
             slidesPerView: 1,
             spaceBetween: 30,
@@ -229,10 +291,66 @@
                     slidesPerView: 1,
                 },
                 1024: {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                 },
             }
         });
+
+       //modal 
+
+        function toggleModal() {
+            const modal = document.getElementById('requestModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            } else {
+                modalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // File upload
+        const imageUpload = document.getElementById('imageUpload');
+        const filePreview = document.getElementById('filePreview');
+        const previewImage = document.getElementById('previewImage');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+
+        imageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    fileName.textContent = file.name;
+                    fileSize.textContent = formatFileSize(file.size);
+                    filePreview.classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function removeFile() {
+            imageUpload.value = '';
+            filePreview.classList.add('hidden');
+            previewImage.src = '';
+            fileName.textContent = '';
+            fileSize.textContent = '';
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
     </script>
 </body>
 
