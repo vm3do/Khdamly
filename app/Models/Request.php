@@ -9,10 +9,10 @@ class Request extends Model
     protected $fillable = [
         'artisan_id',
         'client_id',
-        'category_id',
         'description',
         'status',
         'price',
+        'image',
     ];
 
     public function artisan()

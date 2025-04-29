@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtisanController;
+use App\Http\Controllers\RequestController;
 
 
 Route::get('/profile', function () {
@@ -43,4 +44,6 @@ Route::delete('/artisan/{id}', [ArtisanController::class, 'destroy'])->name('art
 Route::get('/artisan/{id}/portfolio', [ArtisanController::class, 'portfolio'])->name('artisan.portfolio');
 Route::post('/artisan/{id}/portfolio', [ArtisanController::class, 'storePortfolio'])->name('artisan.portfolio.store');
 Route::delete('/artisan/{id}/portfolio/{portfolioId}', [ArtisanController::class, 'destroyPortfolio'])->name('artisan.portfolio.destroy');
+
+Route::post('/artisan/{id}/request', [RequestController::class, 'store'])->name('artisan.request');
 

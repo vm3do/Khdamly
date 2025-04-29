@@ -22,6 +22,62 @@
 <body class="bg-cream font-montserrat text-gray-800">
     @include('components.header')
 
+    <!-- Messages -->
+    @if ($errors->any())
+        <div class="fixed top-4 right-4 z-50">
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-lg max-w-md">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-red-800">There were some errors with your submission</h3>
+                        <div class="mt-2 text-sm text-red-700">
+                            <ul class="list-disc pl-5 space-y-1">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ml-auto pl-3">
+                        <button onclick="this.parentElement.parentElement.remove()" class="text-red-500 hover:text-red-700">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if(session('success'))
+        <div class="fixed top-4 right-4 z-50">
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg shadow-lg max-w-md">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-green-800">{{ session('success') }}</p>
+                    </div>
+                    <div class="ml-auto pl-3">
+                        <button onclick="this.parentElement.parentElement.remove()" class="text-green-500 hover:text-green-700">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <!-- Cover Section -->
     <section class="relative h-[200px] bg-luxury-green/5">
         <div class="absolute inset-0">
@@ -117,21 +173,21 @@
                 </button>
             </div>
             
-            <form class="space-y-6">
+            <form  action="{{route('artisan.request', $artisan->id)}}" method="POST"  class="space-y-6">
                 <div>
                     <label class="block text-gray-700 mb-2">Description</label>
-                    <textarea class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" rows="4" placeholder="Describe your request in detail..."></textarea>
+                    <textarea name="description" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" rows="4" placeholder="Describe your request in detail..."></textarea>
                 </div>
                 
                 <div>
                     <label class="block text-gray-700 mb-2">Minimum Price (MAD)</label>
-                    <input type="number" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter minimum price">
+                    <input name="budget" type="number" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter minimum price">
                 </div>
                 
                 <div>
                     <label class="block text-gray-700 mb-2">Example Image (Optional)</label>
                     <div class="border-2 border-dashed border-gold/20 rounded-lg p-6 text-center hover:border-gold transition duration-300">
-                        <input type="file" class="hidden" id="imageUpload" accept="image/*">
+                        <input name="image" type="file" class="hidden" id="imageUpload" accept="image/*">
                         <label for="imageUpload" class="cursor-pointer">
                             <svg class="w-12 h-12 mx-auto text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
