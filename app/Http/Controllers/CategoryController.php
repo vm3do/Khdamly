@@ -50,7 +50,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|min:2|max:50',
+        ]);
+
+        $category = Category::findOrFail($id);
+        $category->update($validated);
+
+        return back()->with('success', 'Category updated successfully');
     }
 
     /**
@@ -58,6 +65,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return back()->with('success', 'Category deleted successfully');
     }
 }

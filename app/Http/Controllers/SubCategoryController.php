@@ -29,20 +29,21 @@ class SubCategoryController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|min:2|max:50',
+            'category_id' => 'required|int|exists:categories,id',
+        ]);
+
+        $subCategory = SubCategory::findOrFail($id);
+        $subCategory->update($validated);
+
+        return back()->with('success', 'Sub category updated successfully');
     }
 
     /**
@@ -50,6 +51,9 @@ class SubCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $subCategory = SubCategory::findOrFail($id);
+        $subCategory->delete();
+
+        return back()->with('success', 'Sub category deleted successfully');
     }
 }
