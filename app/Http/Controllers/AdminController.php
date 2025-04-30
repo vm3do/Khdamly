@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function index(){
         $categories = Category::all();
-        $categories->load('subCategories');
+        $categories->load(['subCategories']);
         return view('dashboard', compact('categories'));
     }
 }

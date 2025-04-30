@@ -274,11 +274,12 @@
                         </svg>
                     </button>
                 </div>
-                <form id="categoryForm" class="space-y-4">
+                <form action="{{route('category.store')}}" method="POST" id="categoryForm" class="space-y-4">
+                    @csrf
                     <input type="hidden" id="categoryId">
                     <div>
                         <label class="block text-gray-700 mb-2">Category Name</label>
-                        <input type="text" id="categoryName" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter category name">
+                        <input type="text" id="categoryName" name="name" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter category name">
                     </div>
                     <div class="flex justify-end gap-4">
                         <button type="button" onclick="toggleCategoryModal()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300">
@@ -303,12 +304,12 @@
                         </svg>
                     </button>
                 </div>
-                <form id="subcategoryForm" class="space-y-4">
-                    <input type="hidden" id="subcategoryId">
-                    <input type="hidden" id="parentCategoryId">
+                <form action="{{route('subcategory.store')}}" method="post" id="subcategoryForm" class="space-y-4">
+                    @csrf
+                    <input type="hidden" name="category_id" id="parentCategoryId">
                     <div>
                         <label class="block text-gray-700 mb-2">Subcategory Name</label>
-                        <input type="text" id="subcategoryName" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter subcategory name">
+                        <input type="text" name="name" id="subcategoryName" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter subcategory name">
                     </div>
                     <div class="flex justify-end gap-4">
                         <button type="button" onclick="toggleSubcategoryModal()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300">
@@ -511,7 +512,7 @@
         portfolioBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const artisanId = btn.dataset.artisanId;
-                // fetching images mn be3d
+                // 
                 portfolioModal.classList.remove('hidden');
             });
         });
@@ -552,41 +553,11 @@
         }
 
         function editCategory(id) {
-            // Fetch category data and populate form
-            document.getElementById('categoryModalTitle').textContent = 'Edit Category';
-            document.getElementById('categoryId').value = id;
-            toggleCategoryModal();
         }
 
         function editSubcategory(id) {
-            // Fetch subcategory data and populate form
-            document.getElementById('subcategoryModalTitle').textContent = 'Edit Subcategory';
-            document.getElementById('subcategoryId').value = id;
-            toggleSubcategoryModal();
         }
 
-        function deleteCategory(id) {
-            if (confirm('Are you sure you want to delete this category? This will also delete all its subcategories.')) {
-                // Delete category
-            }
-        }
-
-        function deleteSubcategory(id) {
-            if (confirm('Are you sure you want to delete this subcategory?')) {
-                // Delete subcategory
-            }
-        }
-
-        // Form submissions
-        document.getElementById('categoryForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Handle category form submission
-        });
-
-        document.getElementById('subcategoryForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Handle subcategory form submission
-        });
     </script>
 </body>
 
