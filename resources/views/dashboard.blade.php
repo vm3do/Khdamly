@@ -323,6 +323,60 @@
             </div>
         </div>
 
+        <!-- Delete Category Modal -->
+        <div id="deleteCategoryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-playfair text-2xl text-luxury-green">Delete Category</h3>
+                    <button onclick="toggleDeleteCat()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-gray-600 mb-6">Are you sure you want to delete this category? This will also delete all its subcategories.</p>
+                <div class="flex justify-end gap-4">
+                    <button onclick="toggleDeleteCat()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300">
+                        Cancel
+                    </button>
+                    <form action="" method="POST" id="deleteCategoryForm">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Subcategory Modal -->
+        <div id="deleteSubcategoryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-playfair text-2xl text-luxury-green">Delete Subcategory</h3>
+                    <button onclick="toggleDeleteSub()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-gray-600 mb-6">Are you sure you want to delete this subcategory?</p>
+                <div class="flex justify-end gap-4">
+                    <button onclick="toggleDeleteSub()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300">
+                        Cancel
+                    </button>
+                    <form action="" method="POST" id="deleteSubcategoryForm">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- Users Management -->
         <div class="mt-8 bg-white rounded-2xl p-6 border-2 border-gold/20 shadow-lg shadow-gold/5">
             <div class="flex items-center justify-between mb-6">
@@ -556,6 +610,32 @@
         }
 
         function editSubcategory(id) {
+        }
+
+        // Delete Modals
+        const deleteCategoryModal = document.getElementById('deleteCategoryModal');
+        const deleteSubcategoryModal = document.getElementById('deleteSubcategoryModal');
+
+        function toggleDeleteCat(id = null) {
+            if (id) {
+                document.getElementById('deleteCategoryForm').action = `{{ route('category.destroy', '') }}/${id}`;
+            }
+            deleteCategoryModal.classList.toggle('hidden');
+        }
+
+        function toggleDeleteSub(id = null) {
+            if (id) {
+                document.getElementById('deleteSubcategoryForm').action = `{{ route('subcategory.destroy', '') }}/${id}`;
+            }
+            deleteSubcategoryModal.classList.toggle('hidden');
+        }
+
+        function deleteCategory(id) {
+            toggleDeleteCat(id);
+        }
+
+        function deleteSubcategory(id) {
+            toggleDeleteSub(id);
         }
 
     </script>
