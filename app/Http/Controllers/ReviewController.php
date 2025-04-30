@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -26,12 +27,16 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
+        // dd($request->all());
+        $artisan = User::where('role', 'artisan')->where('is_blocked', false)->findOrFail($id);
+        $request->merge(['artisan_id' => $id]);
+
         $validated = $request->validate([
-            'artisan_id' => 'required|exists:users,id',
+            'artisan_id' => 'required|int',
             'rating' => 'required|numeric|min:1|max:5',
-            'review' => 'required|string|max:255|min:10',
+            'comment' => 'required|string|max:255',
         ]);
 
         $validated['client_id'] = auth()->id;

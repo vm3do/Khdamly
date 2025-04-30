@@ -2,29 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class SubCategoryController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:50',
+            'category_id' => 'required|int|exists:categories,id',
         ]);
 
-        Category::create($validated);
+        SubCategory::create($validated);
         
         return back()->with('success', 'Sub category created successfully');
     }

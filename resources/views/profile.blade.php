@@ -160,6 +160,12 @@
             
             <form  action="{{route('artisan.request', $artisan->id)}}" method="post"  class="space-y-6">
                 @csrf
+
+                <div>
+                    <label class="block text-gray-700 mb-2">Minimum Price (MAD)</label>
+                    <input name="title" type="text" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter a title">
+                </div>
+
                 <div>
                     <label class="block text-gray-700 mb-2">Description</label>
                     <textarea name="description" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" rows="4" placeholder="Describe your request in detail..."></textarea>
@@ -268,7 +274,7 @@
         <div class="max-w-screen-xl px-4 sm:px-6 md:px-8 lg:px-12 mx-auto">
             <h2 class="font-playfair text-3xl text-luxury-green mb-8">Client Reviews</h2>
             
-            <form action="{{route('artisans', $artisan->id)}}" method="POST" class="mb-12">
+            <form action="{{route('review', $artisan->id)}}" method="POST" class="mb-12">
                 @csrf
                 <div class="flex flex-col gap-4">
                     <div class="flex items-center gap-2">

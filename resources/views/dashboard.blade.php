@@ -193,6 +193,135 @@
             </div>
         </div>
 
+        <!-- Categories Management -->
+        <div class="mt-8 bg-white rounded-2xl p-6 border-2 border-gold/20 shadow-lg shadow-gold/5">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="font-playfair text-2xl text-luxury-green">Categories Management</h2>
+                <button onclick="toggleCategoryModal()" class="px-4 py-2 bg-luxury-green text-white rounded-lg hover:bg-light-green transition duration-300 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Add Category
+                </button>
+            </div>
+
+            <!-- Categories List -->
+            <div class="space-y-6">
+                @foreach($categories as $category)
+                <div class="bg-cream rounded-xl p-4 border border-gold/20">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-luxury-green/10 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-luxury-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">{{ $category->name }}</h3>
+                                <p class="text-sm text-gray-500">{{ $category->subcategories->count() }} sub-categories</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="toggleSubcategoryModal('{{ $category->id }}')" class="px-3 py-1 text-sm bg-gold/10 text-gold rounded-lg hover:bg-gold/20 transition duration-300">
+                                Add Subcategory
+                            </button>
+                            <button onclick="editCategory('{{ $category->id }}')" class="p-2 text-luxury-green hover:bg-luxury-green/10 rounded-lg transition duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                </svg>
+                            </button>
+                            <button onclick="deleteCategory('{{ $category->id }}')" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Subcategories List -->
+                    <div class="ml-8 flex flex-wrap gap-2">
+                        @foreach($category->subcategories as $subcategory)
+                        <div class="flex items-center gap-2 bg-cream border border-gold/20 rounded-full px-4 py-2">
+                            <span class="text-gray-600 text-sm">{{ $subcategory->name }}</span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="editSubcategory('{{ $subcategory->id }}')" class="text-luxury-green hover:text-light-green transition duration-300">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                    </svg>
+                                </button>
+                                <button onclick="deleteSubcategory('{{ $subcategory->id }}')" class="text-red-500 hover:text-red-600 transition duration-300">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- Category Modal -->
+        <div id="categoryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-playfair text-2xl text-luxury-green" id="categoryModalTitle">Add Category</h3>
+                    <button onclick="toggleCategoryModal()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <form id="categoryForm" class="space-y-4">
+                    <input type="hidden" id="categoryId">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Category Name</label>
+                        <input type="text" id="categoryName" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter category name">
+                    </div>
+                    <div class="flex justify-end gap-4">
+                        <button type="button" onclick="toggleCategoryModal()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-luxury-green text-white rounded-lg hover:bg-light-green transition duration-300">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Subcategory Modal -->
+        <div id="subcategoryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-playfair text-2xl text-luxury-green" id="subcategoryModalTitle">Add Subcategory</h3>
+                    <button onclick="toggleSubcategoryModal()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <form id="subcategoryForm" class="space-y-4">
+                    <input type="hidden" id="subcategoryId">
+                    <input type="hidden" id="parentCategoryId">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Subcategory Name</label>
+                        <input type="text" id="subcategoryName" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter subcategory name">
+                    </div>
+                    <div class="flex justify-end gap-4">
+                        <button type="button" onclick="toggleSubcategoryModal()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-luxury-green text-white rounded-lg hover:bg-light-green transition duration-300">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- Users Management -->
         <div class="mt-8 bg-white rounded-2xl p-6 border-2 border-gold/20 shadow-lg shadow-gold/5">
             <div class="flex items-center justify-between mb-6">
@@ -405,6 +534,58 @@
             if (e.target === reportModal) {
                 reportModal.classList.add('hidden');
             }
+        });
+
+        // Category Management
+        const categoryModal = document.getElementById('categoryModal');
+        const subcategoryModal = document.getElementById('subcategoryModal');
+
+        function toggleCategoryModal() {
+            categoryModal.classList.toggle('hidden');
+        }
+
+        function toggleSubcategoryModal(categoryId = null) {
+            if (categoryId) {
+                document.getElementById('parentCategoryId').value = categoryId;
+            }
+            subcategoryModal.classList.toggle('hidden');
+        }
+
+        function editCategory(id) {
+            // Fetch category data and populate form
+            document.getElementById('categoryModalTitle').textContent = 'Edit Category';
+            document.getElementById('categoryId').value = id;
+            toggleCategoryModal();
+        }
+
+        function editSubcategory(id) {
+            // Fetch subcategory data and populate form
+            document.getElementById('subcategoryModalTitle').textContent = 'Edit Subcategory';
+            document.getElementById('subcategoryId').value = id;
+            toggleSubcategoryModal();
+        }
+
+        function deleteCategory(id) {
+            if (confirm('Are you sure you want to delete this category? This will also delete all its subcategories.')) {
+                // Delete category
+            }
+        }
+
+        function deleteSubcategory(id) {
+            if (confirm('Are you sure you want to delete this subcategory?')) {
+                // Delete subcategory
+            }
+        }
+
+        // Form submissions
+        document.getElementById('categoryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Handle category form submission
+        });
+
+        document.getElementById('subcategoryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Handle subcategory form submission
         });
     </script>
 </body>
