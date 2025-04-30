@@ -225,7 +225,7 @@
                             <button onclick="toggleSubcategoryModal('{{ $category->id }}')" class="px-3 py-1 text-sm bg-gold/10 text-gold rounded-lg hover:bg-gold/20 transition duration-300">
                                 Add Subcategory
                             </button>
-                            <button onclick="editCategory('{{ $category->id }}')" class="p-2 text-luxury-green hover:bg-luxury-green/10 rounded-lg transition duration-300">
+                            <button onclick="editCategory('{{ $category->id }}', '{{ $category->name }}')" class="p-2 text-luxury-green hover:bg-luxury-green/10 rounded-lg transition duration-300">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
                                 </svg>
@@ -244,7 +244,7 @@
                         <div class="flex items-center gap-2 bg-cream border border-gold/20 rounded-full px-4 py-2">
                             <span class="text-gray-600 text-sm">{{ $subcategory->name }}</span>
                             <div class="flex items-center gap-2">
-                                <button onclick="editSubcategory('{{ $subcategory->id }}')" class="text-luxury-green hover:text-light-green transition duration-300">
+                                <button onclick="editSubcategory('{{ $subcategory->id }}', '{{ $subcategory->name }}')" class="text-luxury-green hover:text-light-green transition duration-300">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
                                     </svg>
@@ -351,7 +351,7 @@
         </div>
 
         <!-- Delete Subcategory Modal -->
-        <div id="deleteSubcategoryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+        <div id="deleteSubModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
             <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-playfair text-2xl text-luxury-green">Delete Subcategory</h3>
@@ -374,6 +374,66 @@
                         </button>
                     </form>
                 </div>
+            </div>
+        </div>
+
+        <!-- Edit Category Modal -->
+        <div id="editCatModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-playfair text-2xl text-luxury-green">Edit Category</h3>
+                    <button onclick="toggleEditCat()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <form action="" method="POST" id="editCategoryForm" class="space-y-4">
+                    @csrf
+                    @method('PUT')
+                    <div>
+                        <label class="block text-gray-700 mb-2">Category Name</label>
+                        <input type="text" name="name" id="editCategoryName" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter category name">
+                    </div>
+                    <div class="flex justify-end gap-4">
+                        <button type="button" onclick="toggleEditCat()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-luxury-green text-white rounded-lg hover:bg-light-green transition duration-300">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edit Subcategory Modal -->
+        <div id="editSubModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-playfair text-2xl text-luxury-green">Edit Subcategory</h3>
+                    <button onclick="toggleEditSub()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <form action="" method="POST" id="editSubcategoryForm" class="space-y-4">
+                    @csrf
+                    @method('PUT')
+                    <div>
+                        <label class="block text-gray-700 mb-2">Subcategory Name</label>
+                        <input type="text" name="name" id="editSubcategoryName" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter subcategory name">
+                    </div>
+                    <div class="flex justify-end gap-4">
+                        <button type="button" onclick="toggleEditSub()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-luxury-green text-white rounded-lg hover:bg-light-green transition duration-300">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -606,15 +666,17 @@
             subcategoryModal.classList.toggle('hidden');
         }
 
-        function editCategory(id) {
+        function editCategory(id, name) {
+            toggleEditCat(id, name);
         }
 
-        function editSubcategory(id) {
+        function editSubcategory(id, name) {
+            toggleEditSub(id, name);
         }
 
         // Delete Modals
         const deleteCategoryModal = document.getElementById('deleteCategoryModal');
-        const deleteSubcategoryModal = document.getElementById('deleteSubcategoryModal');
+        const deleteSubModal = document.getElementById('deleteSubModal');
 
         function toggleDeleteCat(id = null) {
             if (id) {
@@ -627,7 +689,7 @@
             if (id) {
                 document.getElementById('deleteSubcategoryForm').action = `{{ route('subcategory.destroy', '') }}/${id}`;
             }
-            deleteSubcategoryModal.classList.toggle('hidden');
+            deleteSubModal.classList.toggle('hidden');
         }
 
         function deleteCategory(id) {
@@ -636,6 +698,26 @@
 
         function deleteSubcategory(id) {
             toggleDeleteSub(id);
+        }
+
+        // Edit Modals
+        const editCatModal = document.getElementById('editCatModal');
+        const editSubModal = document.getElementById('editSubModal');
+
+        function toggleEditCat(id = null, name = null) {
+            if (id) {
+                document.getElementById('editCategoryForm').action = `{{ route('category.update', '') }}/${id}`;
+                document.getElementById('editCategoryName').value = name;
+            }
+            editCatModal.classList.toggle('hidden');
+        }
+
+        function toggleEditSub(id = null, name = null) {
+            if (id) {
+                document.getElementById('editSubcategoryForm').action = `{{ route('subcategory.update', '') }}/${id}`;
+                document.getElementById('editSubcategoryName').value = name;
+            }
+            editSubModal.classList.toggle('hidden');
         }
 
     </script>

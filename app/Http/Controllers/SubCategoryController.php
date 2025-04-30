@@ -35,9 +35,9 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:50',
-            'category_id' => 'required|int|exists:categories,id',
         ]);
 
         $subCategory = SubCategory::findOrFail($id);
