@@ -13,6 +13,8 @@ class AuthController extends Controller
 {
     public function showRegister(){
         $categories = Category::all();
+        $categories->load(['subCategories']);
+        // dd($categories->toArray());
         return view('auth.signup', compact('categories'));
     }
 
@@ -24,7 +26,6 @@ class AuthController extends Controller
     public function register(Request $request){
 
         // dd($request->all());
-
         $rules = [
             'name' => 'required|min:2|string|max:255',
             'email' => 'required|email|string|unique:users',
@@ -35,7 +36,7 @@ class AuthController extends Controller
         ];
         
         if ($request->role == 'artisan') {
-            $rules['category_id'] = 'required|int|exists:categories,id';
+            $rules['subcategory_id'] = 'required|int|exists:sub_categories,id';
             $rules['portfolio'] = 'required|array|min:3';
             $rules['portfolio.*'] = 'required|image|mimes:jpeg,png,jpg|max:2048';
         }

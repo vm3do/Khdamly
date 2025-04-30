@@ -110,14 +110,18 @@
                     <div id="artisan-fields" class="hidden space-y-4">
                         <div>
                             <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                            <select id="category" name="category_id" value="{{ old('category_id') }}"
+                            <select id="category" name="subcategory_id" value="{{ old('subcategory_id') }}"
                                 class="appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-gold/20 text-gray-900 focus:outline-none focus:ring-luxury-green focus:border-luxury-green focus:z-10 sm:text-sm">
                                 <option value="">Select your category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
+                                    <optgroup label="{{ $category->name }}">
+                                        @foreach ($category->subCategories as $subcategory)
+                                            <option value="{{ $subcategory->id }}"
+                                                {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
+                                                {{ $subcategory->name }}
+                                            </option>
+                                        @endforeach
+                                    </optgroup>
                                 @endforeach
                             </select>
                         </div>

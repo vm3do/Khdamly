@@ -192,7 +192,7 @@ return [
     */
 
     'attributes' => [
-        'category_id' => 'category',
+        'subcategory_id' => 'category',
     ],
 
 ];
