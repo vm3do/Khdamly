@@ -9,6 +9,7 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\UserController;
 
 Route::get('/pprofile', function () {
     return view('user-profile');
@@ -35,6 +36,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 //admin
 Route::get('/dashboard', [AdminController::class,'index'])->name('dashbaord');
 
+//users
+Route::put('/user/{id}', [UserController::class, 'manage'])->name('user.manage');
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 
 //artisans
@@ -44,7 +48,7 @@ Route::get('/artisan/{id}', [ArtisanController::class, 'show'])->name('artisan.s
 Route::put('/artisan/{id}', [ArtisanController::class, 'update'])->name('artisan.update');
 Route::delete('/artisan/{id}', [ArtisanController::class, 'destroy'])->name('artisan.destroy');
 Route::delete('/artisan/{id}', [ArtisanController::class, 'destroy'])->name('artisan.destroy');
-Route::post('/artisan/{id}/refuse', [ArtisanController::class, 'refuse'])->name('artisan.refuse');
+Route::put('/artisan/{id}/refuse', [ArtisanController::class, 'refuse'])->name('artisan.refuse');
 Route::put('/artisan/{id}/approve', [ArtisanController::class, 'approve'])->name('artisan.approve');
 
 Route::delete('/artisan/{id}/portfolio/{portfolioId}', [ArtisanController::class, 'destroyPortfolio'])->name('artisan.portfolio.destroy');

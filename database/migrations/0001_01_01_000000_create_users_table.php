@@ -18,13 +18,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->enum('role', ['client', 'artisan', 'admin'])->default('client');
             $table->foreignId('subcategory_id')->nullable()->constrained('sub_categories')->onDelete('set null');
-            $table->enum('status', ['pending', 'active', 'refused'])->default('active');
+            $table->enum('status', ['pending', 'active', 'refused', 'banned'])->default('active');
             $table->text('bio')->nullable();
             $table->string('city')->nullable();
             $table->string('profile_pic')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_blocked')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
