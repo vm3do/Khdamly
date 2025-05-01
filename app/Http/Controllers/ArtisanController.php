@@ -61,13 +61,19 @@ class ArtisanController extends Controller
         return back()->with('success', 'Artisan deleted successfully');
     }
 
-    public function portfolio(Request $request, string $id)
+    public function refuse(string $id)
     {
         $artisan = User::where('role', 'artisan')->findOrFail($id);
-        $artisan->load(['portfolio']);
-        // dd($artisan->toArray());
-        return response()->json([
-            'portfolio' => $artisan->portfolio,
-        ]);
+        $artisan->update(['status' => 'refused']);
+        return back()->with('success', 'Artisan refused successfully');
     }
+
+    public function approve(string $id)
+    {
+        $artisan = User::where('role', 'artisan')->findOrFail($id);
+        $artisan->update(['status' => 'active']);
+        return back()->with('success', 'Artisan accepted successfully');
+    }
+
+
 }

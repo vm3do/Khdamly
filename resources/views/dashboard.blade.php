@@ -140,13 +140,17 @@
                                 </td>
                                 <td class="py-4">
                                     <div class="flex items-center gap-2">
+                                        <form action="{{route('artisan.approve', $pending->id)}}" method="POST" class="flex items-center">
+                                            @method('PUT')
+                                            @csrf
                                         <button class="text-luxury-green hover:text-light-green">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                                             </svg>
                                         </button>
+                                        </form>
 
-                                        <form action="artisan.refused" method="POST" class="flex items center">
+                                        <form action="artisan.refused" method="POST" class="flex items-center">
                                             @csrf
                                             <button class="text-red-500 hover:text-red-600">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -478,6 +482,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gold/20">
+                        @foreach($users as $user)
                         <tr class="text-sm">
                             <td class="py-4">
                                 <div class="flex items-center gap-3">
@@ -486,16 +491,16 @@
                                             alt="Profile" class="w-full h-full object-cover">
                                     </div>
                                     <div>
-                                        <span class="block">John Doe</span>
-                                        <span class="text-xs text-gray-500">john@example.com</span>
+                                        <span class="block">{{$user->name}}</span>
+                                        <span class="text-xs text-gray-500">{{$user->email}}</span>
                                     </div>
                                 </div>
                             </td>
-                            <td class="py-4">Artisan</td>
+                            <td class="py-4">{{$user->role}}</td>
                             <td class="py-4">
-                                <span class="px-3 py-1 rounded-full text-xs bg-luxury-green/10 text-luxury-green">Active</span>
+                                <span class="px-3 py-1 rounded-full text-xs bg-luxury-green/10 text-luxury-green">{{ucwords($user->status)}}</span>
                             </td>
-                            <td class="py-4">Jan 15, 2024</td>
+                            <td class="py-4">{{$user->created_at->format('m d, Y')}}</td>
                             <td class="py-4">
                                 <div class="flex items-center gap-2">
                                     <button class="text-luxury-green hover:text-light-green">
@@ -511,6 +516,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
