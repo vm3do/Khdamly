@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Portfolio;
 use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
@@ -35,7 +37,21 @@ class PortfolioController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $artisan = User::findOrFail($id);
+        $portfolios = $artisan->portfolios()->get();
+        
+        return response()->json([
+            'artisan' => [
+                'name' => $artisan->name,
+                'subcategory' => $artisan->subCategory->name
+            ],
+            'portfolios' => $portfolios->map(function($portfolio) {
+                return [
+                    'id' => $portfolio->id,
+                    'path' => asset('storage/' . $portfolio->path)
+                ];
+            })
+        ]);
     }
 
     /**

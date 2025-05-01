@@ -118,7 +118,7 @@
                                 <td class="py-4">
                                     <div class="flex items-center gap-3">
                                         <div class="w-8 h-8 rounded-full overflow-hidden">
-                                            <img src="{{$pending->profile_pic}}" 
+                                            <img src="{{$pending->profile_pic ?? asset('images/profile.svg')}}" 
                                                 alt="Profile" class="w-full h-full object-cover">
                                         </div>
                                         <span>{{$pending->name}}</span>
@@ -126,7 +126,11 @@
                                 </td>
                                 <td class="py-4">{{$pending->subCategory->name}}</td>
                                 <td class="py-4">
-                                    <button class="text-luxury-green hover:text-light-green portfolio-btn" data-artisan-id="{{$pending->id}}">
+                                    <button class="text-luxury-green hover:text-light-green portfolio-btn" 
+                                        data-artisan-id="{{$pending->id}}"
+                                        data-artisan-name="{{$pending->name}}"
+                                        data-subcategory="{{$pending->subCategory->name}}"
+                                        data-portfolio='@json($pending->portfolio->map(function($portfolio) { return asset("storage/" . $portfolio->path); }))'>
                                         View Portfolio
                                     </button>
                                 </td>
@@ -142,7 +146,7 @@
                                             </svg>
                                         </button>
 
-                                        <form action="artisan.refused" method="POST">
+                                        <form action="artisan.refused" method="POST" class="flex items center">
                                             @csrf
                                             <button class="text-red-500 hover:text-red-600">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -526,22 +530,7 @@
             </div>
             <div class="swiper portfolio-swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1583244539570-2e9b0d0a0a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                            alt="Pottery Work" class="w-full h-[500px] object-cover rounded-xl">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1583244539570-2e9b0d0a0a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                            alt="Wood Carving" class="w-full h-[500px] object-cover rounded-xl">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1583244539570-2e9b0d0a0a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                            alt="Textile Art" class="w-full h-[500px] object-cover rounded-xl">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1583244539570-2e9b0d0a0a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                            alt="Metal Work" class="w-full h-[500px] object-cover rounded-xl">
-                    </div>
+                    
                 </div>
                 <div class="swiper-pagination"></div>
                 <div class="swiper-button-prev text-luxury-green"></div>
@@ -628,11 +617,24 @@
         // Portfolio Modal
         const portfolioModal = document.getElementById('portfolioModal');
         const portfolioBtns = document.querySelectorAll('.portfolio-btn');
+        const portfolioSwiperWrapper = document.querySelector('.portfolio-swiper .swiper-wrapper');
         
         portfolioBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                const artisanId = btn.dataset.artisanId;
-                // 
+                const artisanName = btn.dataset.artisanName;
+                const subcategory = btn.dataset.subcategory;
+                const portfolios = JSON.parse(btn.dataset.portfolio);
+
+                portfolioSwiperWrapper.innerHTML = '';
+
+                portfolios.forEach(path => {
+                    portfolioSwiperWrapper.innerHTML += `
+                        <div class="swiper-slide">
+                            <img src="${path}" alt="Portfolio Image" class="w-full h-[500px] object-cover rounded-xl">
+                        </div>
+                    `;
+                });
+
                 portfolioModal.classList.remove('hidden');
             });
         });

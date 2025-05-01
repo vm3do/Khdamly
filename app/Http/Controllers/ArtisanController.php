@@ -28,7 +28,7 @@ class ArtisanController extends Controller
             ->withAvg('artisanReviews as rating', 'rating')
             ->orderByDesc('rating')
             ->withCount('artisanReviews as reviews_count')
-            ->with(['category', 'subcategory'])->paginate(6);
+            ->with(['subCategory'])->paginate(6);
         // dd($artisans->toArray());
         return view('artisans', compact('artisans'));
     }
@@ -36,7 +36,7 @@ class ArtisanController extends Controller
     public function show(string $id)
     {
         $artisan = User::where('role', 'artisan')->findOrFail($id);
-        $artisan->load(['category', 'subcategory' , 'portfolio']);
+        $artisan->load(['subCategory' , 'portfolio']);
         $artisan->loadAvg('artisanReviews as rating', 'rating');
         $artisan->loadCount('messages');
 
@@ -59,5 +59,15 @@ class ArtisanController extends Controller
         $artisan = User::where('role', 'artisan')->findOrFail($id);
         $artisan->destroy();
         return back()->with('success', 'Artisan deleted successfully');
+    }
+
+    public function portfolio(Request $request, string $id)
+    {
+        $artisan = User::where('role', 'artisan')->findOrFail($id);
+        $artisan->load(['portfolio']);
+        // dd($artisan->toArray());
+        return response()->json([
+            'portfolio' => $artisan->portfolio,
+        ]);
     }
 }

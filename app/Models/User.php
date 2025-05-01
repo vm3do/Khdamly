@@ -58,7 +58,7 @@ class User extends Authenticatable
 
     public function subCategory()
     {
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsTo(SubCategory::class, 'subcategory_id');
     }
 
     public function artisanReviews()

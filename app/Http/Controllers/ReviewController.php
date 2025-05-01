@@ -39,7 +39,7 @@ class ReviewController extends Controller
             'comment' => 'required|string|max:255',
         ]);
 
-        $validated['client_id'] = auth()->id;
+        $validated['client_id'] = auth()->id();
 
         Review::create($validated);
         return back()->with('success', 'Review created successfully.');

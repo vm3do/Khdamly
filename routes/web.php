@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\PortfolioController;
 
 Route::get('/pprofile', function () {
     return view('user-profile');
@@ -50,7 +51,7 @@ Route::delete('/artisan/{id}/portfolio/{portfolioId}', [ArtisanController::class
 Route::post('/artisan/{id}/request', [RequestController::class, 'store'])->name('artisan.request');
 
 //reviews
-Route::post('/review}', [ReviewController::class, 'store'])->name('review.store');
+Route::post('/review/{id}', [ReviewController::class, 'store'])->name('review.store');
 
 // categories
 Route::post('/category}', [CategoryController::class, 'store'])->name('category.store');
@@ -61,5 +62,8 @@ Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('c
 Route::post('/subcategory}', [SubCategoryController::class, 'store'])->name('subcategory.store');
 Route::put('/subcategory/{id}', [SubCategoryController::class, 'update'])->name('subcategory.update');
 Route::delete('/subcategory/{id}', [SubCategoryController::class, 'destroy'])->name('subcategory.destroy');
+
+// portfolios
+Route::get('/artisan/{id}/portfolio', [PortfolioController::class, 'show'])->name('portfolio.show');
 
 
