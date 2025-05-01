@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('role', ['client', 'artisan', 'admin'])->default('client');
-            $table->foreignId('subcategory_id')->nullable()->constrained('subcategories')->onDelete('set null');
+            $table->foreignId('subcategory_id')->nullable()->constrained('sub_categories')->onDelete('set null');
+            $table->enum('status', ['pending', 'active', 'refused'])->default('active');
             $table->text('bio')->nullable();
             $table->string('city')->nullable();
             $table->string('profile_pic')->nullable();

@@ -113,25 +113,26 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gold/20">
+                            @foreach($pendings as $pending)
                             <tr class="text-sm">
                                 <td class="py-4">
                                     <div class="flex items-center gap-3">
                                         <div class="w-8 h-8 rounded-full overflow-hidden">
-                                            <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                            <img src="{{$pending->profile_pic}}" 
                                                 alt="Profile" class="w-full h-full object-cover">
                                         </div>
-                                        <span>Mohammed Ali</span>
+                                        <span>{{$pending->name}}</span>
                                     </div>
                                 </td>
-                                <td class="py-4">Pottery</td>
+                                <td class="py-4">{{$pending->subCategory->name}}</td>
                                 <td class="py-4">
-                                    <button class="text-luxury-green hover:text-light-green portfolio-btn" data-artisan-id="1">
+                                    <button class="text-luxury-green hover:text-light-green portfolio-btn" data-artisan-id="{{$pending->id}}">
                                         View Portfolio
                                     </button>
                                 </td>
-                                <td class="py-4">Today</td>
+                                <td class="py-4">{{$pending->created_at->format('d-m-y')}}</td>
                                 <td class="py-4">
-                                    <span class="px-3 py-1 rounded-full text-xs bg-luxury-green/10 text-luxury-green">Pending</span>
+                                    <span class="px-3 py-1 rounded-full text-xs bg-luxury-green/10 text-luxury-green">{{$pending->status}}</span>
                                 </td>
                                 <td class="py-4">
                                     <div class="flex items-center gap-2">
@@ -140,14 +141,19 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                                             </svg>
                                         </button>
-                                        <button class="text-red-500 hover:text-red-600">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                            </svg>
-                                        </button>
+
+                                        <form action="artisan.refused" method="POST">
+                                            @csrf
+                                            <button class="text-red-500 hover:text-red-600">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

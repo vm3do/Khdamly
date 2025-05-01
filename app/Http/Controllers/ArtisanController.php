@@ -28,7 +28,7 @@ class ArtisanController extends Controller
             ->withAvg('artisanReviews as rating', 'rating')
             ->orderByDesc('rating')
             ->withCount('artisanReviews as reviews_count')
-            ->with(['category'])->paginate(6);
+            ->with(['category', 'subcategory'])->paginate(6);
         // dd($artisans->toArray());
         return view('artisans', compact('artisans'));
     }
@@ -36,7 +36,7 @@ class ArtisanController extends Controller
     public function show(string $id)
     {
         $artisan = User::where('role', 'artisan')->findOrFail($id);
-        $artisan->load(['category', 'portfolio']);
+        $artisan->load(['category', 'subcategory' , 'portfolio']);
         $artisan->loadAvg('artisanReviews as rating', 'rating');
         $artisan->loadCount('messages');
 
@@ -46,17 +46,6 @@ class ArtisanController extends Controller
         return view('profile', compact('artisan', 'reviews'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
@@ -67,6 +56,8 @@ class ArtisanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $artisan = User::where('role', 'artisan')->findOrFail($id);
+        $artisan->destroy();
+        return back()->with('success', 'Artisan deleted successfully');
     }
 }

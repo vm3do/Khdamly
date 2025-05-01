@@ -14,4 +14,8 @@ class SubCategory extends Model
     public function category(){
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function users(){
+        return $this->hasMany(User::class, 'subcategory_id');
+    }
 }

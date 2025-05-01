@@ -43,6 +43,9 @@ class AuthController extends Controller
 
         // dd($validated = $request->validate($rules));
         $validated = $request->validate($rules);
+        if($request->role === 'artisan'){
+            $validated['status'] = 'pending';
+        }
 
         $user = User::create($validated);
         // dd($user->toArray());

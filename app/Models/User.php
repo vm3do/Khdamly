@@ -21,7 +21,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'category_id',
+        'subcategory_id',
+        'status',
         'bio',
         'is_blocked',
         'city',
@@ -53,6 +54,11 @@ class User extends Authenticatable
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class);
     }
 
     public function artisanReviews()
