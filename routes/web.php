@@ -76,6 +76,8 @@ Route::put('/artisan/{id}/request', [RequestController::class, 'update'])->name(
 Route::delete('/artisan/{id}/request', [RequestController::class, 'destroy'])->name('request.destroy');
 Route::get('/artisan/{id}/request', [RequestController::class, 'index'])->name('request.index');
 Route::get('/artisan/{id}/request', [RequestController::class, 'show'])->name('request.show');
+Route::put('/artisan/{id}/request', [RequestController::class, 'approve'])->name('request.approve');
+Route::put('/artisan/{id}/request', [RequestController::class, 'refuse'])->name('request.refuse');
 
 
 

@@ -124,7 +124,7 @@
                                     <td class="py-4">
                                         <div class="flex items-center gap-3">
                                             <div class="w-8 h-8 rounded-full overflow-hidden">
-                                                <img src="{{ asset('storage/' . $pending->profile_pic) ?? asset('images/profile.svg') }}"
+                                                <img src="{{ $pending->profile_pic ? asset('storage/' . $pending->profile_pic) : asset('images/profile.svg') }}"
                                                     alt="Profile" class="w-full h-full object-cover">
                                             </div>
                                             <span>{{ $pending->name }}</span>
@@ -565,7 +565,7 @@
                                 <td class="py-4">
                                     <div class="flex items-center gap-3">
                                         <div class="w-8 h-8 rounded-full overflow-hidden">
-                                            <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                                            <img src="{{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : asset('images/profile.svg') }}"
                                                 alt="Profile" class="w-full h-full object-cover">
                                         </div>
                                         <div>

@@ -9,6 +9,7 @@ class Request extends Model
     protected $fillable = [
         'artisan_id',
         'client_id',
+        'title',
         'description',
         'status',
         'budget',

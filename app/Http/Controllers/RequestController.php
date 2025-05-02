@@ -21,7 +21,7 @@ class RequestController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $validated['client_id'] = auth()->id;
+        $validated['client_id'] = auth()->id();
 
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('requests', 'public');
@@ -46,7 +46,7 @@ class RequestController extends Controller
         if(auth()->user()->role !== 'artisan' || auth()->user()->requests()->where('id', $id)->count() === 0) {
             abort(403, 'Unauthorized action.');
         }
-        
+
         $requestModel = RequestModel::findOrFail($id);
         $requestModel->update([
             'status' => 'accepted',

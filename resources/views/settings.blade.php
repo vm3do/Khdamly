@@ -45,7 +45,7 @@
                 <div class="relative">
                     <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-gold shadow-xl">
                         
-                        <img id="profile-preview" src="{{ asset('storage/' . auth()->user()->profile_pic) ?? asset('images/profile.svg') }}" 
+                        <img id="profile-preview" src="{{ auth()->user()->profile_pic ? asset('storage/' . auth()->user()->profile_pic) : '/images/default-profile.jpg' }}" 
                             alt="Profile Picture" class="w-full h-full object-cover">
                     </div>
                     <label for="profile-picture" 
