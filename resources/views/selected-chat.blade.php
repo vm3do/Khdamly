@@ -109,7 +109,6 @@
 
                     <!-- Messages -->
                     <div class="flex-1 p-6 overflow-y-auto space-y-6">
-                        <!-- Message -->
                         @foreach($request->messages as $message)
                         @if($message->sender_id == auth()->user()->id)
                         <!-- Message -->
@@ -118,9 +117,9 @@
                                 <div class="bg-luxury-green text-white rounded-2xl p-4">
                                     <p class="text-white">{{$message->message}}</p>
                                     @if($message->image)
-                                    <div class="mt-4 grid grid-cols-2 gap-2">
+                                    <div class="mt-4">
                                         <img src="{{ asset('storage/' . $message->image) }}"
-                                            alt="message_pic" class="w-full h-32 object-cover rounded-xl">
+                                            alt="message_pic" class="w-full max-w-md rounded-xl object-cover hover:opacity-90 transition-opacity cursor-pointer">
                                     </div>
                                     @endif
                                 </div>
@@ -139,9 +138,9 @@
                                 <div class="bg-cream rounded-2xl p-4">
                                     <p class="text-gray-800">{{$message->message}}</p>
                                     @if($message->image)
-                                    <div class="mt-4 grid grid-cols-2 gap-2">
+                                    <div class="mt-4">
                                         <img src="{{ asset('storage/' . $message->image) }}"
-                                            alt="message_pic" class="w-full h-32 object-cover rounded-xl">
+                                            alt="message_pic" class="w-full max-w-md rounded-xl object-cover hover:opacity-90 transition-opacity cursor-pointer">
                                     </div>
                                     @endif
                                 </div>
@@ -151,26 +150,7 @@
                         @endif 
                         @endforeach
 
-                        <!-- Message -->
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gold">
-                                <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                                    alt="Profile" class="w-full h-full object-cover">
-                            </div>
-                            <div class="flex-1">
-                                <div class="bg-cream rounded-2xl p-4">
-                                    <p class="text-gray-800">Here are some examples of my recent work. I specialize in
-                                        traditional patterns with a modern twist...</p>
-                                    <div class="mt-4 grid grid-cols-2 gap-2">
-                                        <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                                            alt="Pottery" class="w-full h-32 object-cover rounded-xl">
-                                        <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                                            alt="Pottery" class="w-full h-32 object-cover rounded-xl">
-                                    </div>
-                                </div>
-                                <span class="text-xs text-gray-500 mt-1">30m ago</span>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <!-- Input -->
