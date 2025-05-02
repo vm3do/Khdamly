@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
-        'request_id',
         'sender_id',
-        'content',
-        'image_path',
+        'request_id',
+        'message',
+        'path',
     ];
 
     public function request()
