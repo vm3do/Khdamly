@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('receiver_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('request_id')->constrained('requests')->onDelete('cascade');
             $table->text('message')->nullable();
             $table->string('image_path')->nullable();

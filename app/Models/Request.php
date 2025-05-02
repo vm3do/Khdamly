@@ -25,4 +25,8 @@ class Request extends Model
     {
         return $this->belongsTo(User::class, 'client_id');
     }
+
+    public function messages(){
+        return $this->hasMany(Message::class, 'request_id');
+    }
 }

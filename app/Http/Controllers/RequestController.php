@@ -8,6 +8,36 @@ use App\Models\Request as RequestModel;
 
 class RequestController extends Controller
 {
+
+    public function chats(){
+        $requests = RequestModel::where('client_id', auth()->id())
+        ->orWhere('artisan_id', auth()->id())
+        ->where('status', 'accepted')
+        ->with(['artisan', 'client', 'messages'])
+        ->get();
+
+        dd($requests->toArray());
+
+        return view('chat', compact('requests'));
+    }
+
+    public function showChat(string $id){
+        $request = RequestModel::where('status', 'accepted')
+        ->with(['artisan', 'client', 'messages'])
+        ->where('client_id', auth()->id())
+        ->orWhere('artisan_id', auth()->id())
+        ->findOrFail($id);
+
+        $requests = RequestModel::where('status', 'accepted')
+        ->with(['artisan', 'client', 'messages'])
+        ->where('client_id', auth()->id())
+        ->orWhere('artisan_id', auth()->id())
+        ->get();
+        // dd($request->toArray());
+        return view('selected-chat', compact('request', 'requests'));
+
+    }
+
     public function store(Request $request, string $id)
     {
         // dd($request->all());

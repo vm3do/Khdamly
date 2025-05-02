@@ -20,6 +20,7 @@
 
 <body class="bg-cream font-montserrat text-gray-800">
     @include('components.header')
+    @include('components.error')
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
             <div class="text-center">
@@ -31,16 +32,6 @@
                     </a>
                 </p>
             </div>
-
-            @if ($errors->any())
-                <div class="bg-red-500 text-white p-4 rounded-md">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
 
             <form class="mt-8 space-y-6" action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
                 @csrf

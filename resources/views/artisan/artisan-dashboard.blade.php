@@ -131,6 +131,7 @@
                         <tr class="text-left text-gray-500 border-b border-gold/20">
                             <th class="pb-4">Client</th>
                             <th class="pb-4">Request</th>
+                            <th class="pb-4">Image</th>
                             <th class="pb-4">Date</th>
                             <th class="pb-4">Status</th>
                             <th class="pb-4">Actions</th>
@@ -152,6 +153,12 @@
                                     </div>
                                 </td>
                                 <td class="py-4">{{ $request->title }}</td>
+                                <td class="py-4">
+                                    <div class="w-16 h-16 rounded-lg overflow-hidden cursor-pointer request-image">
+                                        <img src="{{ $request->image ? asset('storage/' . $request->image) : asset('images/request-default.svg') }}"
+                                            alt="Request Image" class="w-full h-full object-cover">
+                                    </div>
+                                </td>
                                 <td class="py-4">{{ $request->created_at->format('M d, Y') }}</td>
                                 <td class="py-4">
                                     <span
@@ -197,8 +204,50 @@
 
     @include('components.footer')
 
+    <!-- image Modal -->
+    <div id="requestImageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl p-4 max-w-2xl w-full mx-auto relative">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-playfair text-xl text-luxury-green">Request Image</h3>
+                <button class="text-gray-500 hover:text-gray-700 close-modal">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="relative max-h-[70vh] overflow-auto">
+                <img id="modalImage" src="" alt="Request Image" class="w-full h-auto rounded-lg object-contain">
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        // Image Modal
+        const requestImageModal = document.getElementById('requestImageModal');
+        const modalImage = document.getElementById('modalImage');
+        const requestImages = document.querySelectorAll('.request-image');
+
+        requestImages.forEach(image => {
+            image.addEventListener('click', () => {
+                const imgSrc = image.querySelector('img').src;
+                modalImage.src = imgSrc;
+                requestImageModal.classList.remove('hidden');
+            });
+        });
+
+        document.querySelectorAll('.close-modal').forEach(btn => {
+            btn.addEventListener('click', () => {
+                requestImageModal.classList.add('hidden');
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === requestImageModal) {
+                requestImageModal.classList.add('hidden');
+            }
+        });
+
         // Revenue
         const revenueCtx = document.getElementById('revenueChart').getContext('2d');
         new Chart(revenueCtx, {

@@ -15,9 +15,9 @@ Route::get('/pprofile', function () {
     return view('user-profile');
 })->name('user-profile');
 
-Route::get('/chat', function () {
-    return view('chat');
-})->name('chat');
+// Route::get('/chat', function () {
+//     return view('chat');
+// })->name('chat');
 
 //authentification
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
@@ -74,10 +74,11 @@ Route::get('/artisan/{id}/portfolio', [PortfolioController::class, 'show'])->nam
 Route::post('/artisan/{id}/request', [RequestController::class, 'store'])->name('request.store');
 Route::put('/artisan/{id}/request', [RequestController::class, 'update'])->name('request.update');  
 Route::delete('/artisan/{id}/request', [RequestController::class, 'destroy'])->name('request.destroy');
-Route::get('/artisan/{id}/request', [RequestController::class, 'index'])->name('request.index');
 Route::get('/artisan/{id}/request', [RequestController::class, 'show'])->name('request.show');
-Route::put('/artisan/{id}/approve', [RequestController::class, 'approve'])->name('request.approve');
-Route::put('/artisan/{id}/refuse', [RequestController::class, 'refuse'])->name('request.refuse');
+Route::put('/artisan/{id}/request/approve', [RequestController::class, 'approve'])->name('request.approve');
+Route::put('/artisan/{id}/request/refuse', [RequestController::class, 'refuse'])->name('request.refuse');
 
+Route::get('/chats', [RequestController::class, 'chats'])->name('request.chats');
+Route::get('/chats/{id}', [RequestController::class, 'showChat'])->name('request.show.chat');
 
 
