@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('artisan_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('client_id')->constrained('users')->onDelete('cascade');
+            $table->string('title');
             $table->text('description');
             $table->decimal('budget', 10, 2);
             $table->string('image')->nullable();

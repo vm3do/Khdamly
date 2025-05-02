@@ -86,4 +86,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Report::class);
     }
+
+    public function artisanRequests(){
+        return $this->hasMany(Request::class, 'artisan_id');
+    }
+
+    public function clientRequests(){
+        return $this->hasMany(Request::class, 'client_id');
+    }
 }

@@ -16,6 +16,7 @@
         rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 </head>
 
 <body class="bg-cream font-montserrat text-gray-800">
@@ -161,6 +162,26 @@
     </div>
 
     @include('components.footer')
+    <script>
+        Pusher.logToConsole = true;
+
+const pusher = new Pusher('ab7edf357e81d712bd72', {
+    cluster: 'mt1',
+    encrypted: true,
+    authEndpoint: '/broadcasting/auth'
+});
+        Echo.private('user.' + userId)
+    .listen('MessageSent', (e) => {
+        console.log("Incoming message:", e.message);
+
+        if (e.message.conversation_id === currentChatId) {
+            appendToMessages(e.message);
+        } else {
+            updateChatListUI(e.message);
+        }
+    });
+    </script>
+    
 </body>
 
 </html>

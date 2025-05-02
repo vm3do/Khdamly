@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageSent;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -27,7 +29,22 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $validated = $request->validate([
+            'content' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'receiver_id' => 'required|int|exists:users,id',
+        ]);
+
+        $validated['sender_id'] = auth()->id();
+
+        // dd($validated);
+        $message = Message::create($validated);
+
+
+        broadcast(new MessageSent($message))->toOthers();
+
+        return back()->with('success', 'Message sent successfully.');
     }
 
     /**
@@ -35,7 +52,7 @@ class MessageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**

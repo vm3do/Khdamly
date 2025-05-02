@@ -11,7 +11,7 @@ class RequestController extends Controller
     public function store(Request $request, string $id)
     {
         // dd($request->all());
-        User::where('role', 'artisan')->where('is_blocked', false)->findOrFail($id);
+        User::where('role', 'artisan')->where('status', 'active')->findOrFail($id);
         $request->merge(['artisan_id' => $id]);
         $validated = $request->validate([
             'artisan_id' => 'required|int',
@@ -29,6 +29,30 @@ class RequestController extends Controller
 
         RequestModel::create($validated);
         return back()->with('success', 'Request created successfully.');
+    }
+
+    public function refuse(string $id)
+    {
+        $requestModel = RequestModel::findOrFail($id);
+        $requestModel->update([
+            'status' => 'refused',
+        ]);
+
+        return back()->with('success', 'Request is refused successfully.');
+    }
+
+    public function approve(string $id)
+    {
+        if(auth()->user()->role !== 'artisan' || auth()->user()->requests()->where('id', $id)->count() === 0) {
+            abort(403, 'Unauthorized action.');
+        }
+        
+        $requestModel = RequestModel::findOrFail($id);
+        $requestModel->update([
+            'status' => 'accepted',
+        ]);
+
+        return back()->with('success', 'Request is approved successfully.');
     }
 
     public function show(string $id)

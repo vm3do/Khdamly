@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
+    public function settings(){
+        $user = auth()->user();
+        return view('settings', compact('user'));
+    }
+
     /**
      * Update the specified resource in storage.
      */

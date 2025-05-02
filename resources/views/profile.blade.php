@@ -119,11 +119,11 @@
                 </button>
             </div>
             
-            <form  action="{{route('artisan.request', $artisan->id)}}" method="post"  class="space-y-6">
+            <form  action="{{route('request.store', $artisan->id)}}" method="post" enctype="multipart/form-data"  class="space-y-6">
                 @csrf
 
                 <div>
-                    <label class="block text-gray-700 mb-2">Minimum Price (MAD)</label>
+                    <label class="block text-gray-700 mb-2">Title</label>
                     <input name="title" type="text" class="w-full bg-cream border-2 border-gold/20 focus:border-gold rounded-lg py-3 px-4 text-gray-800 placeholder-gray-400 focus:outline-none transition duration-300" placeholder="Enter a title">
                 </div>
 

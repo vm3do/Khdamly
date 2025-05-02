@@ -18,13 +18,6 @@ Route::get('/pprofile', function () {
 Route::get('/chat', function () {
     return view('chat');
 })->name('chat');
-Route::get('/settings', function () {
-    return view('artisan.settings');
-})->name('artisan.settings.update');
-
-Route::get('/artisan-dashboard', function () {
-    return view('artisan-dashboard');
-})->name('artisan-dashboard');
 
 //authentification
 Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
@@ -42,6 +35,7 @@ Route::put('/user/{id}/update-personal-info', [UserController::class, 'updateInf
 Route::put('/user/{id}/update-password', [UserController::class, 'updatePassword'])->name('user.update.password');
 Route::put('/user/{id}/update-profile', [UserController::class, 'updateProfile'])->name('user.update.profile');
 Route::put('/user/{id}/update-portfolio', [UserController::class, 'updatePortfolio'])->name('user.update.portfolio');
+Route::get('settings', [UserController::class, 'settings'])->name('settings');
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 
@@ -49,7 +43,7 @@ Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.dest
 Route::get('/', [ArtisanController::class,'homepage'])->name('homepage');
 Route::get('/artisans', [ArtisanController::class,'index'])->name('artisans');
 Route::get('/artisan/{id}', [ArtisanController::class, 'show'])->name('artisan.show');
-Route::get('/artisan/dashboard', [ArtisanController::class, 'dashboard'])->name('artisan.dashboard');
+Route::get('/artisan-dashboard', [ArtisanController::class, 'dashboard'])->name('artisan.dashboard');
 Route::put('/artisan/{id}', [ArtisanController::class, 'update'])->name('artisan.update');
 Route::delete('/artisan/{id}', [ArtisanController::class, 'destroy'])->name('artisan.destroy');
 Route::put('/artisan/{id}/refuse', [ArtisanController::class, 'refuse'])->name('artisan.refuse');
@@ -75,5 +69,13 @@ Route::delete('/subcategory/{id}', [SubCategoryController::class, 'destroy'])->n
 
 // portfolios
 Route::get('/artisan/{id}/portfolio', [PortfolioController::class, 'show'])->name('portfolio.show');
+
+// requests & messages ( chat system )
+Route::post('/artisan/{id}/request', [RequestController::class, 'store'])->name('request.store');
+Route::put('/artisan/{id}/request', [RequestController::class, 'update'])->name('request.update');  
+Route::delete('/artisan/{id}/request', [RequestController::class, 'destroy'])->name('request.destroy');
+Route::get('/artisan/{id}/request', [RequestController::class, 'index'])->name('request.index');
+Route::get('/artisan/{id}/request', [RequestController::class, 'show'])->name('request.show');
+
 
 

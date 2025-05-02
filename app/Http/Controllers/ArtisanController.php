@@ -75,5 +75,13 @@ class ArtisanController extends Controller
         return back()->with('success', 'Artisan accepted successfully');
     }
 
+    public function dashboard()
+    {
+        $requests = auth()->user()->artisanRequests()->where('status', 'pending')->with(['client'])->paginate(5);
+        // dd($requests->toArray());
+        $requestsCount = $requests->count();
+        return view('artisan.artisan-dashboard', compact('requests', 'requestsCount'));
+    }
+
 
 }

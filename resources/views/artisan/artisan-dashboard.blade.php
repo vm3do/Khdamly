@@ -77,8 +77,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">Pending Requests</p>
-                        <h3 class="font-playfair text-3xl text-luxury-green mt-2">3</h3>
-                        <p class="text-sm text-gold mt-2">2 new today</p>
+                        <h3 class="font-playfair text-3xl text-luxury-green mt-2">{{$requestsCount}}</h3>
                     </div>
                     <div class="w-12 h-12 rounded-full bg-luxury-green/10 flex items-center justify-center">
                         <svg class="w-6 h-6 text-luxury-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,6 +129,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gold/20">
+                        @foreach ($requests as $request)
                         <tr class="text-sm">
                             <td class="py-4">
                                 <div class="flex items-center gap-3">
@@ -138,15 +138,15 @@
                                             alt="Profile" class="w-full h-full object-cover">
                                     </div>
                                     <div>
-                                        <span class="block">Sarah Johnson</span>
-                                        <span class="text-xs text-gray-500">sarah@example.com</span>
+                                        <span class="block">{{$request->client->name}}</span>
+                                        <span class="text-xs text-gray-500">{{$request->client->email}}</span>
                                     </div>
                                 </div>
                             </td>
-                            <td class="py-4">Custom Pottery Set</td>
-                            <td class="py-4">Today</td>
+                            <td class="py-4">{{$request->title}}</td>
+                            <td class="py-4">{{$request->created_at->format('M d, Y')}}</td>
                             <td class="py-4">
-                                <span class="px-3 py-1 rounded-full text-xs bg-luxury-green/10 text-luxury-green">Pending</span>
+                                <span class="px-3 py-1 rounded-full text-xs bg-luxury-green/10 text-luxury-green">{{ucwords($request->status)}}</span>
                             </td>
                             <td class="py-4">
                                 <div class="flex items-center gap-2">
@@ -163,6 +163,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
