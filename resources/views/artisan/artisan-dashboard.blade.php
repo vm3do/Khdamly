@@ -143,7 +143,7 @@
                                 <td class="py-4">
                                     <div class="flex items-center gap-3">
                                         <div class="w-8 h-8 rounded-full overflow-hidden">
-                                            <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                                            <img src="{{ $request->client->profile_image ? asset('storage/' . $request->client->profile_image) : asset('images/profile.svg') }}"
                                                 alt="Profile" class="w-full h-full object-cover">
                                         </div>
                                         <div>
@@ -154,10 +154,15 @@
                                 </td>
                                 <td class="py-4">{{ $request->title }}</td>
                                 <td class="py-4">
-                                    <div class="w-16 h-16 rounded-lg overflow-hidden cursor-pointer request-image">
-                                        <img src="{{ $request->image ? asset('storage/' . $request->image) : asset('images/request-default.svg') }}"
-                                            alt="Request Image" class="w-full h-full object-cover">
-                                    </div>
+                                    @if ($request->image)
+                                        <div class="w-16 h-16 rounded-lg overflow-hidden cursor-pointer request-image">
+                                            <img src="{{ asset('storage/' . $request->image) }}" alt="Request Image"
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                    @else
+                                        <span
+                                            class="px-3 py-1 rounded-full text-xs bg-luxury-green/10 text-luxury-green">None</span>
+                                    @endif
                                 </td>
                                 <td class="py-4">{{ $request->created_at->format('M d, Y') }}</td>
                                 <td class="py-4">
@@ -205,18 +210,21 @@
     @include('components.footer')
 
     <!-- image Modal -->
-    <div id="requestImageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
+    <div id="requestImageModal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl p-4 max-w-2xl w-full mx-auto relative">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="font-playfair text-xl text-luxury-green">Request Image</h3>
                 <button class="text-gray-500 hover:text-gray-700 close-modal">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
             <div class="relative max-h-[70vh] overflow-auto">
-                <img id="modalImage" src="" alt="Request Image" class="w-full h-auto rounded-lg object-contain">
+                <img id="modalImage" src="" alt="Request Image"
+                    class="w-full h-auto rounded-lg object-contain">
             </div>
         </div>
     </div>
