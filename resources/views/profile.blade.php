@@ -56,7 +56,7 @@
             <div class="flex flex-col items-center">
                 <!-- Profile Picture -->
                 <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-gold shadow-xl relative">
-                    <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                    <img src="{{$artisan->profile_pic ? asset('storage/' . $artisan->profile_pic) : asset('images/profile.svg')}}" 
                         alt="Artisan" class="w-full h-full object-cover">
                 </div>
 

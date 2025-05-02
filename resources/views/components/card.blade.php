@@ -1,7 +1,7 @@
 <div data-aos="fade-up"
     class="group flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-[0_4px_6px_-1px_rgba(197,165,114,0.2),0_2px_4px_-1px_rgba(197,165,114,0.1)] hover:shadow-xl transition-all duration-300">
     <div class="relative h-64 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        <img src="{{ $image }}"
             alt="Pottery Artisan"
             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>

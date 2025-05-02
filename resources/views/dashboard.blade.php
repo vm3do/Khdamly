@@ -124,7 +124,7 @@
                                     <td class="py-4">
                                         <div class="flex items-center gap-3">
                                             <div class="w-8 h-8 rounded-full overflow-hidden">
-                                                <img src="{{ $pending->profile_pic ?? asset('images/profile.svg') }}"
+                                                <img src="{{ asset('storage/' . $pending->profile_pic) ?? asset('images/profile.svg') }}"
                                                     alt="Profile" class="w-full h-full object-cover">
                                             </div>
                                             <span>{{ $pending->name }}</span>

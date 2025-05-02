@@ -119,7 +119,7 @@
                         job="{{ $artisan->subCategory->name }}"
                         name="{{ $artisan->name }}"
                         description="{{ $artisan->bio }}"
-                        image="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                        image="{{ $artisan->profile_pic ? asset('storage/' . $artisan->profile_pic) : asset('images/profile.svg') }}"
                         link="{{route('artisan.show', $artisan->id)}}"
                         rating="{{$artisan->rating}}"
                         count="{{$artisan->reviews_count}}"
