@@ -16,7 +16,7 @@ class RequestController extends Controller
         ->with(['artisan', 'client', 'messages'])
         ->get();
 
-        dd($requests->toArray());
+        // dd($requests->toArray());
 
         return view('chat', compact('requests'));
     }

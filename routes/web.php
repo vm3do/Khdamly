@@ -79,6 +79,6 @@ Route::put('/artisan/{id}/request/approve', [RequestController::class, 'approve'
 Route::put('/artisan/{id}/request/refuse', [RequestController::class, 'refuse'])->name('request.refuse');
 
 Route::get('/chats', [RequestController::class, 'chats'])->name('request.chats');
-Route::get('/chats/{id}', [RequestController::class, 'showChat'])->name('request.show.chat');
+Route::get('/chat/{id}', [RequestController::class, 'showChat'])->name('request.show.chat');
 
 
