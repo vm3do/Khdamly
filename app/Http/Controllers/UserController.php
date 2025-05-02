@@ -58,10 +58,21 @@ class UserController extends Controller
 
     public function updateProfile(Request $request, string $id){
 
-        $user = User::where('id', auth()->id())->findOrFail($id);
+        if ($id != auth()->id()) {
+            abort(403);
+        }
+        $user = User::findOrFail($id);
         $validated = $request->validate([
-            'profile_pic' => 'required|mimes:jpg,jpeg,png,'
-        ])
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if($request->hasFile('profile_pic')){
+            $path = $request->file('profile_pic')->store('profiles', 'public');
+            $user->update(['profile_pic' => $path]);
+            return back()->with('success', 'Profile pic updated successfully');
+        }
+
+        return back()->with('error', 'Error updating your profile, Try again');
     }
 
 

@@ -41,9 +41,11 @@
         <div class="max-w-3xl mx-auto">
             <div class="flex flex-col items-center">
                 <!-- Profile -->
+                {{-- @dd(auth()->user()->toArray()) --}}
                 <div class="relative">
                     <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-gold shadow-xl">
-                        <img id="profile-preview" src="{{ auth()->user()->profile_pic ?? asset('images/profile.svg') }}" 
+                        
+                        <img id="profile-preview" src="{{ asset('storage/' . auth()->user()->profile_pic) ?? asset('images/profile.svg') }}" 
                             alt="Profile Picture" class="w-full h-full object-cover">
                     </div>
                     <label for="profile-picture" 
@@ -52,7 +54,12 @@
                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                         </svg>
                     </label>
-                    <input type="file" id="profile-picture" name="profile_picture" accept="image/*" class="hidden">
+                    <form action="{{route('user.update.profile', auth()->id())}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <input type="file" id="profile-picture" name="profile_pic" accept="image/*"  class="hidden">
+                        <button type="submit" class="absolute -bottom-2 mx-auto bg-red-500 p-2">update</button>
+                    </form>
                 </div>
             </div>
         </div>

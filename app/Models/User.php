@@ -22,6 +22,7 @@ class User extends Authenticatable
         'password',
         'role',
         'subcategory_id',
+        'profile_pic',
         'status',
         'bio',
         'is_blocked',
