@@ -138,6 +138,12 @@
                             <div class="flex-1">
                                 <div class="bg-cream rounded-2xl p-4">
                                     <p class="text-gray-800">{{$message->message}}</p>
+                                    @if($message->image)
+                                    <div class="mt-4 grid grid-cols-2 gap-2">
+                                        <img src="{{ asset('storage/' . $message->image) }}"
+                                            alt="message_pic" class="w-full h-32 object-cover rounded-xl">
+                                    </div>
+                                    @endif
                                 </div>
                                 <span class="text-xs text-gray-500 mt-1">2h ago</span>
                             </div>

@@ -10,7 +10,7 @@ class Message extends Model
         'sender_id',
         'request_id',
         'message',
-        'path',
+        'image',
     ];
 
     public function request()
