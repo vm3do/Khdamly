@@ -20,6 +20,7 @@
 
 <body class="bg-cream font-montserrat text-gray-800">
     @include('components.header')
+    @include('components.error')
 
     <!-- Cover Section -->
     <section class="relative h-[300px] bg-luxury-green/5">

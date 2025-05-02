@@ -21,6 +21,7 @@
 
 <body class="bg-cream font-montserrat text-gray-800">
     @include('components.header')
+    @include('components.error')
 
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12">
         <!-- Stats -->

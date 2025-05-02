@@ -43,7 +43,7 @@ class RequestController extends Controller
 
     public function approve(string $id)
     {
-        if(auth()->user()->role !== 'artisan' || auth()->user()->requests()->where('id', $id)->count() === 0) {
+        if(auth()->user()->role !== 'artisan' || auth()->user()->artisanRequests()->where('id', $id)->count() === 0) {
             abort(403, 'Unauthorized action.');
         }
 
