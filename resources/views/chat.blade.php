@@ -95,17 +95,10 @@
                     <div class="p-6 border-b border-gold/20">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gold">
-                                <img src="{{auth()->user()->role == 'client' ? 
-                                ( $request->artisan->profile_pic ? asset('storage/' . $request->artisan->profile_pic) : asset('images/profile.svg') )
-                                 : ( $request->client->profile_pic ? asset('storage/'. $request->client->profile_pic) : asset('images/profile.svg') )}}"
+                                <img src="{{ asset('images/profile.svg')}}"
                                     alt="Profile" class="w-full h-full object-cover">
                             </div>
-                            <div>
-                                <h3 class="font-playfair text-xl text-luxury-green">{{auth()->user()->role == 'client' ? $request->artisan->name : $request->client->name}}</h3>
-                                @if(auth()->user()->role == 'client')
-                                <p class="text-sm text-gray-500">{{$request->artisan->name}}</p>
-                                @endif
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -132,13 +125,13 @@
                             <div class="flex-1">
                                 <p id="file-name" class="text-sm text-gray-600"></p>
                             </div>
-                            <button onclick="removeImage()" class="text-gray-500 hover:text-red-500">
+                            <button class="text-gray-500 hover:text-red-500">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
-                        <form action="{{ route('message.store', $request->id) }}" method="POST" enctype="multipart/form-data" class="flex items-center gap-4">
+                        <div class="flex items-center gap-4">
                             @csrf
                             <div class="relative flex-1">
                                 <input name="message" type="text" placeholder="Type your message..."
@@ -148,16 +141,16 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
-                                    <input type="file" id="image-upload" name="image" class="hidden" accept="image/*" onchange="previewImage(this)">
+                                    <input class="hidden" accept="image/*" onchange="previewImage(this)">
                                 </label>
                             </div>
-                            <button type="submit" class="p-2 text-gold hover:text-luxury-green transition duration-300">
+                            <button class="p-2 text-gold hover:text-luxury-green transition duration-300">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                                 </svg>
                             </button>
-                        </form>
+                        </div>
                         
                     </div>
                 </div>
