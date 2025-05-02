@@ -31,9 +31,8 @@ class MessageController extends Controller
     {
         // dd($request->all());
         $validated = $request->validate([
-            'content' => 'required|string|max:255',
+            'message' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'receiver_id' => 'required|int|exists:users,id',
         ]);
 
         $validated['sender_id'] = auth()->id();

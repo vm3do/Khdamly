@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtisanController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SubCategoryController;
@@ -81,4 +82,6 @@ Route::put('/artisan/{id}/request/refuse', [RequestController::class, 'refuse'])
 Route::get('/chats', [RequestController::class, 'chats'])->name('request.chats');
 Route::get('/chat/{id}', [RequestController::class, 'showChat'])->name('request.show.chat');
 
+// messages 
+Route::post('/chat/{id}/message', [MessageController::class, 'store'])->name('message.store');
 

@@ -99,8 +99,10 @@
                                     alt="Profile" class="w-full h-full object-cover">
                             </div>
                             <div>
-                                <h3 class="font-playfair text-xl text-luxury-green">Ali Br</h3>
-                                <p class="text-sm text-gray-500">Master Potter</p>
+                                <h3 class="font-playfair text-xl text-luxury-green">{{auth()->user()->role == 'client' ? $request->artisan->name : $request->client->name}}</h3>
+                                @if(auth()->user()->role == 'client')
+                                <p class="text-sm text-gray-500">{{$request->artisan->name}}</p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -122,7 +124,9 @@
                         @else
                         <div class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gold">
-                                <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                                <img src="{{auth()->user()->role == 'client' ? 
+                                ( $request->artisan->profile_pic ? asset('storage/' . $request->artisan->profile_pic) : asset('images/profile.svg') )
+                                 : ( $request->client->profile_pic ? asset('storage/'. $request->client->profile_pic) : asset('images/profile.svg') ) }}"
                                     alt="Profile" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1">
@@ -161,9 +165,9 @@
                     <div class="p-6 border-t border-gold/20">
                         <div class="flex items-center gap-4">
                             <div class="relative flex-1">
-                                <input type="text" placeholder="Type your message..."
+                                <input name="message" type="text" placeholder="Type your message..."
                                     class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gold/20 focus:border-gold focus:outline-none transition duration-300">
-                                <button
+                                <button 
                                     class="absolute left-3 top-1/2 -translate-y-1/2 p-2 text-gold hover:text-luxury-green transition duration-300">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

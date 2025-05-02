@@ -22,19 +22,21 @@
     @include('components.error')
     
     <!-- Cover -->
-    <section class="relative h-[200px] bg-luxury-green/5">
-        <div class="absolute inset-0">
-            <img id="cover-preview" src="{{ auth()->user()->cover_image ?? '/images/default-cover.jpg' }}" 
+    <section class="relative h-[200px] bg-luxury-green">
+        {{-- <div class="absolute inset-0">
+            <img id="cover-preview" src="{{ auth()->user()->cover_image ?? asset('/images/cover.jpg') }}" 
                 alt="Cover" class="w-full h-full object-cover opacity-90">
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-        </div>
-        <label for="cover-image" 
+        </div> --}}
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+
+        {{-- <label for="cover-image" 
             class="absolute top-4 right-4 bg-luxury-green text-white p-2 rounded-full cursor-pointer hover:bg-light-green transition z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
             </svg>
-        </label>
-        <input type="file" id="cover-image" name="cover_image" accept="image/*" class="hidden">
+        </label> --}}
+        {{-- <input type="file" id="cover-image" name="cover_image" accept="image/*" class="hidden"> --}}
     </section>
 
     <section class="relative -mt-16 px-4 sm:px-6 md:px-8 lg:px-12">
@@ -45,7 +47,7 @@
                 <div class="relative">
                     <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-gold shadow-xl">
                         
-                        <img id="profile-preview" src="{{ auth()->user()->profile_pic ? asset('storage/' . auth()->user()->profile_pic) : '/images/default-profile.jpg' }}" 
+                        <img id="profile-preview" src="{{ auth()->user()->profile_pic ? asset('storage/' . auth()->user()->profile_pic) : asset('/images/profile.svg') }}" 
                             alt="Profile Picture" class="w-full h-full object-cover">
                     </div>
                     <label for="profile-picture" 
@@ -204,18 +206,6 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById('profile-preview').src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Cover
-        document.getElementById('cover-image').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('cover-preview').src = e.target.result;
                 }
                 reader.readAsDataURL(file);
             }
