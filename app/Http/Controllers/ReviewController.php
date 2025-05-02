@@ -30,7 +30,7 @@ class ReviewController extends Controller
     public function store(Request $request, string $id)
     {
         // dd($request->all());
-        $artisan = User::where('role', 'artisan')->where('is_blocked', false)->findOrFail($id);
+        $artisan = User::where('role', 'artisan')->where('status', 'active')->findOrFail($id);
         $request->merge(['artisan_id' => $id]);
 
         $validated = $request->validate([

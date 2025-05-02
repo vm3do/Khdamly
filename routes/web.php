@@ -38,6 +38,10 @@ Route::get('/dashboard', [AdminController::class,'index'])->name('dashbaord');
 
 //users
 Route::put('/user/{id}', [UserController::class, 'manage'])->name('user.manage');
+Route::put('/user/{id}/update-personal-info', [UserController::class, 'updateInfo'])->name('user.update.info');
+Route::put('/user/{id}/update-password', [UserController::class, 'updatePassword'])->name('user.update.password');
+Route::put('/user/{id}/update-profile', [UserController::class, 'updateProfile'])->name('user.update.profile');
+Route::put('/user/{id}/update-portfolio', [UserController::class, 'updatePortfolio'])->name('user.update.portfolio');
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 
@@ -45,8 +49,8 @@ Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.dest
 Route::get('/', [ArtisanController::class,'homepage'])->name('homepage');
 Route::get('/artisans', [ArtisanController::class,'index'])->name('artisans');
 Route::get('/artisan/{id}', [ArtisanController::class, 'show'])->name('artisan.show');
+Route::get('/artisan/dashboard', [ArtisanController::class, 'dashboard'])->name('artisan.dashboard');
 Route::put('/artisan/{id}', [ArtisanController::class, 'update'])->name('artisan.update');
-Route::delete('/artisan/{id}', [ArtisanController::class, 'destroy'])->name('artisan.destroy');
 Route::delete('/artisan/{id}', [ArtisanController::class, 'destroy'])->name('artisan.destroy');
 Route::put('/artisan/{id}/refuse', [ArtisanController::class, 'refuse'])->name('artisan.refuse');
 Route::put('/artisan/{id}/approve', [ArtisanController::class, 'approve'])->name('artisan.approve');

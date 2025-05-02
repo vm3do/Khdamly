@@ -19,6 +19,7 @@
 
 <body class="bg-cream font-montserrat text-gray-800">
     @include('components.header')
+    @include('components.error')
     
     <!-- Cover -->
     <section class="relative h-[200px] bg-luxury-green/5">
@@ -42,7 +43,7 @@
                 <!-- Profile -->
                 <div class="relative">
                     <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-gold shadow-xl">
-                        <img id="profile-preview" src="{{ auth()->user()->profile_picture ?? '/images/default-profile.png' }}" 
+                        <img id="profile-preview" src="{{ auth()->user()->profile_pic ?? asset('images/profile.svg') }}" 
                             alt="Profile Picture" class="w-full h-full object-cover">
                     </div>
                     <label for="profile-picture" 
@@ -63,7 +64,7 @@
             <div class="bg-white rounded-2xl p-8 sm:p-12 border-2 border-gold/20 shadow-lg shadow-gold/5">
                 <h2 class="font-playfair text-3xl sm:text-4xl text-luxury-green mb-8 text-center">Profile Settings</h2>
                 
-                <form action="{{ route('artisan.settings.update') }}" method="POST" class="space-y-6">
+                <form action="{{ route('user.update.info', auth()->user()->id) }}" method="POST" class="space-y-6">
                     @csrf
                     @method('PUT')
                     
@@ -93,6 +94,44 @@
                                 <option value="Casa" {{ auth()->user()->city == 'Casa' ? 'selected' : '' }}>Casa</option>
                                 <option value="Rabat" {{ auth()->user()->city == 'Rabat' ? 'selected' : '' }}>Rabat</option>
                                 <option value="Oujda" {{ auth()->user()->city == 'Oujda' ? 'selected' : '' }}>Oujda</option>
+                                <option value="Agadir" {{ auth()->user()->city == 'Agadir' ? 'selected' : '' }}>Agadir</option>
+                                <option value="Tangier" {{ auth()->user()->city == 'Tangier' ? 'selected' : '' }}>Tangier</option>
+                                <option value="Marrakech" {{ auth()->user()->city == 'Marrakech' ? 'selected' : '' }}>Marrakech</option>
+                                <option value="Fes" {{ auth()->user()->city == 'Fes' ? 'selected' : '' }}>Fes</option>
+                                <option value="Meknes" {{ auth()->user()->city == 'Meknes' ? 'selected' : '' }}>Meknes</option>
+                                <option value="Kenitra" {{ auth()->user()->city == 'Kenitra' ? 'selected' : '' }}>Kenitra</option>
+                                <option value="Tetouan" {{ auth()->user()->city == 'Tetouan' ? 'selected' : '' }}>Tetouan</option>
+                                <option value="El Jadida" {{ auth()->user()->city == 'El Jadida' ? 'selected' : '' }}>El Jadida</option>
+                                <option value="Nador" {{ auth()->user()->city == 'Nador' ? 'selected' : '' }}>Nador</option>
+                                <option value="Settat" {{ auth()->user()->city == 'Settat' ? 'selected' : '' }}>Settat</option>
+                                <option value="Khenifra" {{ auth()->user()->city == 'Khenifra' ? 'selected' : '' }}>Khenifra</option>
+                                <option value="Safi" {{ auth()->user()->city == 'Safi' ? 'selected' : '' }}>Safi</option>
+                                <option value="Larache" {{ auth()->user()->city == 'Larache' ? 'selected' : '' }}>Larache</option>
+                                <option value="Berkane" {{ auth()->user()->city == 'Berkane' ? 'selected' : '' }}>Berkane</option>
+                                <option value="Taza" {{ auth()->user()->city == 'Taza' ? 'selected' : '' }}>Taza</option>
+                                <option value="Ksar el Kebir" {{ auth()->user()->city == 'Ksar el Kebir' ? 'selected' : '' }}>Ksar el Kebir</option>
+                                <option value="Sidi Kacem" {{ auth()->user()->city == 'Sidi Kacem' ? 'selected' : '' }}>Sidi Kacem</option> 
+                                <option value="Khouribga" {{ auth()->user()->city == 'Khouribga' ? 'selected' : '' }}>Khouribga</option>
+                                <option value="Azilal" {{ auth()->user()->city == 'Azilal' ? 'selected' : '' }}>Azilal</option>
+                                <option value="Ifrane" {{ auth()->user()->city == 'Ifrane' ? 'selected' : '' }}>Ifrane</option>
+                                <option value="Tiznit" {{ auth()->user()->city == 'Tiznit' ? 'selected' : '' }}>Tiznit</option>
+                                <option value="Essaouira" {{ auth()->user()->city == 'Essaouira' ? 'selected' : '' }}>Essaouira</option>
+                                <option value="Taroudant" {{ auth()->user()->city == 'Taroudant' ? 'selected' : '' }}>Taroudant</option>
+                                <option value="Dakhla" {{ auth()->user()->city == 'Dakhla' ? 'selected' : '' }}>Dakhla</option>
+                                <option value="Laayoune" {{ auth()->user()->city == 'Laayoune' ? 'selected' : '' }}>Laayoune</option>
+                                <option value="Guelmim" {{ auth()->user()->city == 'Guelmim' ? 'selected' : '' }}>Guelmim</option>
+                                <option value="Tantan" {{ auth()->user()->city == 'Tantan' ? 'selected' : '' }}>Tantan</option>
+                                <option value="Assa" {{ auth()->user()->city == 'Assa' ? 'selected' : '' }}>Assa</option>
+                                <option value="Sidi Ifni" {{ auth()->user()->city == 'Sidi Ifni' ? 'selected' : '' }}>Sidi Ifni</option>
+                                <option value="Bouskoura" {{ auth()->user()->city == 'Bouskoura' ? 'selected' : '' }}>Bouskoura</option>
+                                <option value="Mohammedia" {{ auth()->user()->city == 'Mohammedia' ? 'selected' : '' }}>Mohammedia</option>
+                                <option value="Salé" {{ auth()->user()->city == 'Salé' ? 'selected' : '' }}>Salé</option>
+                                <option value="Moulay Yacoub" {{ auth()->user()->city == 'Moulay Yacoub' ? 'selected' : '' }}>Moulay Yacoub</option>
+                                <option value="Tiflet" {{ auth()->user()->city == 'Tiflet' ? 'selected' : '' }}>Tiflet</option>
+                                <option value="Khemisset" {{ auth()->user()->city == 'Khemisset' ? 'selected' : '' }}>Khemisset</option>
+                                <option value="Sefrou" {{ auth()->user()->city == 'Sefrou' ? 'selected' : '' }}>Sefrou</option>
+                                <option value="Beni Mellal" {{ auth()->user()->city == 'Beni Mellal' ? 'selected' : '' }}>Beni Mellal</option>
+                                <option value="Ouarzazate" {{ auth()->user()->city == 'Ouarzazate' ? 'selected' : '' }}>Ouarzazate</option>                                
                             </select>
                         </div>
                     </div>
@@ -114,7 +153,7 @@
                 <!-- Password -->
                 <div class="mt-12 pt-8 border-t border-gold/20">
                     <h3 class="font-playfair text-2xl text-luxury-green mb-6">Change Password</h3>
-                    <form action="{{ route('artisan.settings.password') }}" method="POST" class="space-y-6">
+                    <form action="{{ route('user.update.password', auth()->user()->id) }}" method="POST" class="space-y-6">
                         @csrf
                         @method('PUT')
                         
@@ -125,14 +164,14 @@
                         </div>
 
                         <div>
-                            <label for="new_password" class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
-                            <input type="password" id="new_password" name="new_password" required
+                            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                            <input type="password" id="password" name="password" required
                                 class="w-full px-4 py-3 rounded-xl border-2 border-gold/20 focus:border-gold focus:outline-none transition duration-300">
                         </div>
 
                         <div>
-                            <label for="new_password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
-                            <input type="password" id="new_password_confirmation" name="new_password_confirmation" required
+                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+                            <input type="password" id="password_confirmation" name="password_confirmation" required
                                 class="w-full px-4 py-3 rounded-xl border-2 border-gold/20 focus:border-gold focus:outline-none transition duration-300">
                         </div>
 

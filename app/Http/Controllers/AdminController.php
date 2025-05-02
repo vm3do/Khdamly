@@ -12,9 +12,12 @@ class AdminController extends Controller
         $categories = Category::all();
         $categories->load(['subCategories']);
 
-        $pendings = User::where('status', 'pending')->with(['subCategory', 'portfolio'])->get();
-        $users = User::where('status', 'active')->where('role', '!=', 'admin')->with(['subCategory', 'portfolio'])->get();
+        $pendings = User::where('status', 'pending')->with(['subCategory', 'portfolio'])->paginate(5);
+        $totalPendings = $pendings->count();
+        $users = User::where('role', '!=', 'admin')->with(['subCategory', 'portfolio'])->paginate(5);
 
-        return view('dashboard', compact('categories', 'pendings', 'users'));
+        $totalUsers = User::count();
+        
+        return view('dashboard', compact('categories', 'pendings', 'users', 'totalPendings', 'totalUsers'));
     }
 }

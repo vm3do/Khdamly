@@ -30,7 +30,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">Total Users</p>
-                        <h3 class="font-playfair text-3xl text-luxury-green mt-2">2,543</h3>
+                        <h3 class="font-playfair text-3xl text-luxury-green mt-2">{{$totalUsers}}</h3>
                         <p class="text-sm text-gold mt-2">+12% from last month</p>
                     </div>
                     <div class="w-12 h-12 rounded-full bg-luxury-green/10 flex items-center justify-center">
@@ -47,7 +47,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500">Pending Requests</p>
-                        <h3 class="font-playfair text-3xl text-luxury-green mt-2">24</h3>
+                        <h3 class="font-playfair text-3xl text-luxury-green mt-2">{{$totalPendings}}</h3>
                         <p class="text-sm text-gold mt-2">+5 new today</p>
                     </div>
                     <div class="w-12 h-12 rounded-full bg-luxury-green/10 flex items-center justify-center">
@@ -163,7 +163,8 @@
                                                 </button>
                                             </form>
 
-                                            <form action="{{route('artisan.refuse', $pending->id)}}" method="POST" class="flex items-center">
+                                            <form action="{{ route('artisan.refuse', $pending->id) }}" method="POST"
+                                                class="flex items-center">
                                                 @method('PUT')
                                                 @csrf
                                                 <button class="text-red-500 hover:text-red-600">
@@ -180,6 +181,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="mt-12">
+                    {{ $pendings->links() }}
                 </div>
             </div>
 
@@ -578,27 +582,49 @@
                                 <td class="py-4">{{ $user->created_at->format('M d, Y') }}</td>
                                 <td class="py-4">
                                     <div class="flex items-center gap-2">
-                                        <form action="{{route('user.manage', $user->id)}}" method="POST" class="flex items-center">
-                                            @csrf
-                                            @method('PUT')
-                                        <button class="text-luxury-green hover:text-light-green">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                            </svg>
-                                        </button>
-                                        </form>
 
-                                        <form action="{{route('user.destroy', $user->id)}}" method="POST" class="flex items-center">
+                                        @if ($user->status === 'banned')
+                                            <form action="{{ route('user.manage', $user->id) }}" method="POST"
+                                                class="flex items-center">
+                                                @csrf
+                                                @method('PUT')
+                                                <button class="text-green-500 hover:text-green-600"
+                                                    title="Unban User">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('user.manage', $user->id) }}" method="POST"
+                                                class="flex items-center">
+                                                @csrf
+                                                @method('PUT')
+                                                <button class="text-red-500 hover:text-red-600" title="Ban User">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        @endif
+
+                                        <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                            class="flex items-center">
                                             @csrf
-                                        <button class="text-red-500 hover:text-red-600">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </button>
+                                            <button class="text-red-500 hover:text-red-600" title="Delete User">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
                                         </form>
                                     </div>
                                 </td>
@@ -606,6 +632,9 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div class="mt-12">
+                {{ $users->links() }}
             </div>
         </div>
     </div>
