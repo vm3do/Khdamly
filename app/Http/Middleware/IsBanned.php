@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsAdmin
+class IsBanned
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,11 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!auth()->check() || auth()->user()->role !== 'admin'){
-            abort(404);
+
+        if(auth()->user()->status == 'banned') {
+            abort(403, 'Your account has been banned');
         }
+
         return $next($request);
     }
 }

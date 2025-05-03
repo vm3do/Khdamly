@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsArtisan;
+use App\Http\Middleware\IsBanned;
 use App\Http\Middleware\IsPending;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias(['admin' => IsAdmin::class, 
                             'artisan' => IsArtisan::class,
+                            'banned' => IsBanned::class,
                             'pending' => IsPending::class,]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

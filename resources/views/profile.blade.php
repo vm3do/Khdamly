@@ -209,12 +209,12 @@
                                 alt="Pottery Work" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-700">
                                 <div class="absolute bottom-0 left-0 right-0 p-10">
-                                    <h3 class="text-white text-4xl font-playfair mb-3">Tea Set</h3>
+                                    {{-- <h3 class="text-white text-4xl font-playfair mb-3">Tea Set</h3>
                                     <p class="text-gold text-xl font-cormorant mb-6">Hand-painted with gold accents</p>
                                     <div class="flex items-center gap-3">
                                         <span class="text-white/80 text-lg">Starting from</span>
                                         <span class="text-gold font-medium text-2xl">$250</span>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

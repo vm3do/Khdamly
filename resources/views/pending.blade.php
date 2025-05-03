@@ -101,12 +101,24 @@
                     <!-- Contact Support -->
                     <div class="text-center">
                         <p class="text-gray-600 mb-4">Have questions about your application?</p>
-                        <a href="" class="inline-flex items-center gap-2 text-luxury-green hover:text-light-green transition duration-300">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            Contact Support
-                        </a>
+                        <div class="flex items-center gap-4 justify-center">
+                            <a href="" class="inline-flex items-center gap-2 text-luxury-green hover:text-light-green transition duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                Contact Support
+                            </a>
+                            <form action="{{ route('logout') }}" method="POST" class="inline-flex items-center gap-2 text-red-800 hover:text-red-500 transition duration-300">
+                                @csrf
+                                <button type="submit" class="flex items-center gap-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                </svg>
+                                Logout
+                            </button>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -35,8 +35,8 @@
                 <span class="ml-1 text-gold text-xs">({{$count}})</span>
             </div>
         </div>
-        <p class="text-gray-600 text-sm mb-6 line-clamp-3">Crafting exquisite pottery with traditional
-            {{ $description }}.</p>
+        <p class="text-gray-600 text-sm mb-6 line-clamp-3">
+            {{ $description }}</p>
         <div class="mt-auto">
             <a href="{{ $link }}"
                 class="inline-flex items-center text-luxury-green hover:text-light-green font-medium text-sm transition-colors duration-300">

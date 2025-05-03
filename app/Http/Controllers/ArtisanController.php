@@ -46,11 +46,6 @@ class ArtisanController extends Controller
         return view('profile', compact('artisan', 'reviews'));
     }
 
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      */

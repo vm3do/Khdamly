@@ -17,10 +17,6 @@
                     Artisans
                     <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="#how-it-works" class="relative text-gray-700 hover:text-luxury-green font-medium transition duration-300 group">
-                    How It Works
-                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
             </nav>
             
             <div class="hidden lg:flex items-center space-x-6">
@@ -92,10 +88,7 @@
                     Artisans
                     <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="#how-it-works" class="relative text-gray-700 hover:text-luxury-green font-medium transition duration-300 group">
-                    How It Works
-                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
+
                 <div class="flex flex-col space-y-3 pt-3 border-t border-gray-200">
                     @auth
                         @if(auth()->user()->role === 'admin')

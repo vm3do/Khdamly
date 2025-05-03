@@ -15,6 +15,7 @@ class IsPending
      */
     public function handle(Request $request, Closure $next): Response
     {
+
         if(auth()->user()->status == 'pending'){
             return redirect()->route('artisan.pending');
         }
