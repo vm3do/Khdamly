@@ -9,34 +9,42 @@ use App\Models\Request as RequestModel;
 class RequestController extends Controller
 {
 
-    public function chats(){
-        $requests = RequestModel::where('client_id', auth()->id())
-        ->orWhere('artisan_id', auth()->id())
-        ->where('status', 'accepted')
-        ->with(['artisan', 'client', 'messages'])
-        ->get();
+    public function chats()
+    {
+        $requests = RequestModel::where(function($query) {
+                $query->where('client_id', auth()->id())
+                    ->orWhere('artisan_id', auth()->id());
+            })
+            ->where('status', 'accepted')
+            ->with(['artisan', 'client', 'messages'])
+            ->get();
 
         // dd($requests->toArray());
 
         return view('chat', compact('requests'));
     }
 
-    public function showChat(string $id){
-        $request = RequestModel::where('status', 'accepted')
-        ->with(['artisan', 'client', 'messages'])
-        ->where('client_id', auth()->id())
-        ->orWhere('artisan_id', auth()->id())
-        ->findOrFail($id);
+    public function showChat(string $id)
+    {
+        $request = RequestModel::where(function ($query) {
+            $query->where('client_id', auth()->id())
+                ->orWhere('artisan_id', auth()->id());
+        })
+            ->where('status', 'accepted')
+            ->with(['artisan', 'client', 'messages'])
+            ->findOrFail($id);
 
         $requests = RequestModel::where('status', 'accepted')
-        ->with(['artisan', 'client', 'messages'])
-        ->where('client_id', auth()->id())
-        ->orWhere('artisan_id', auth()->id())
-        ->get();
-        // dd($request->toArray());
-        return view('selected-chat', compact('request', 'requests'));
+            ->where(function ($query) {
+                $query->where('client_id', auth()->id())
+                    ->orWhere('artisan_id', auth()->id());
+            })
+            ->with(['artisan', 'client', 'messages'])
+            ->get();
 
+        return view('selected-chat', compact('request', 'requests'));
     }
+
 
     public function store(Request $request, string $id)
     {
@@ -73,7 +81,7 @@ class RequestController extends Controller
 
     public function approve(string $id)
     {
-        if(auth()->user()->role !== 'artisan' || auth()->user()->artisanRequests()->where('id', $id)->count() === 0) {
+        if (auth()->user()->role !== 'artisan' || auth()->user()->artisanRequests()->where('id', $id)->count() === 0) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -85,10 +93,7 @@ class RequestController extends Controller
         return back()->with('success', 'Request is approved successfully.');
     }
 
-    public function show(string $id)
-    {
-        
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.

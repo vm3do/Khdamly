@@ -67,23 +67,6 @@
                         </form>
                     </div>
                     @endforeach
-
-                    <!-- Chat 2 -->
-                    {{-- <div
-                        class="flex items-center gap-4 p-4 rounded-xl hover:bg-cream/50 cursor-pointer transition duration-300">
-                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gold">
-                            <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                                alt="Profile" class="w-full h-full object-cover">
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center justify-between">
-                                <h3 class="font-medium text-gray-800">Fatima Z</h3>
-                                <span class="text-sm text-gray-500">1d ago</span>
-                            </div>
-                            <p class="text-sm text-gray-600 truncate">I've completed the textile design you
-                                requested...</p>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
 
