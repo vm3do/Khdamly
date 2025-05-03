@@ -31,7 +31,7 @@
                     <div>
                         <p class="text-gray-500">Total Users</p>
                         <h3 class="font-playfair text-3xl text-luxury-green mt-2">{{$totalUsers}}</h3>
-                        <p class="text-sm text-gold mt-2">+12% from last month</p>
+                        {{-- <p class="text-sm text-gold mt-2">+12% from last month</p> --}}
                     </div>
                     <div class="w-12 h-12 rounded-full bg-luxury-green/10 flex items-center justify-center">
                         <svg class="w-6 h-6 text-luxury-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,7 +48,7 @@
                     <div>
                         <p class="text-gray-500">Pending Requests</p>
                         <h3 class="font-playfair text-3xl text-luxury-green mt-2">{{$totalPendings}}</h3>
-                        <p class="text-sm text-gold mt-2">+5 new today</p>
+                        {{-- <p class="text-sm text-gold mt-2">+5 new today</p> --}}
                     </div>
                     <div class="w-12 h-12 rounded-full bg-luxury-green/10 flex items-center justify-center">
                         <svg class="w-6 h-6 text-luxury-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <!-- Reports -->
+            {{-- <!-- Reports -->
             <div class="bg-white rounded-2xl p-6 border-2 border-gold/20 shadow-lg shadow-gold/5">
                 <div class="flex items-center justify-between">
                     <div>
@@ -91,7 +91,7 @@
                         </svg>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="grid grid-cols-1 gap-8">
@@ -188,7 +188,7 @@
             </div>
 
             <!-- Reports -->
-            <div class="bg-white rounded-2xl p-6 border-2 border-gold/20 shadow-lg shadow-gold/5">
+            {{-- <div class="bg-white rounded-2xl p-6 border-2 border-gold/20 shadow-lg shadow-gold/5">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="font-playfair text-2xl text-luxury-green">Reports</h2>
                     <button class="text-gold hover:text-luxury-green transition duration-300">
@@ -229,7 +229,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <!-- Categories Management -->
