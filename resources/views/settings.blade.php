@@ -56,11 +56,15 @@
                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                         </svg>
                     </label>
-                    <form action="{{route('user.update.profile', auth()->id())}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('user.update.profile', auth()->id())}}" method="POST" enctype="multipart/form-data" class="hidden" id="profile-form">
                         @csrf
                         @method('PUT')
-                        <input type="file" id="profile-picture" name="profile_pic" accept="image/*"  class="hidden">
-                        <button type="submit" class="absolute -bottom-2 mx-auto bg-red-500 p-2">update</button>
+                        <input type="file" id="profile-picture" name="profile_pic" accept="image/*" class="hidden">
+                        <button type="submit" class="absolute -top-0 -right-0 bg-green-600 text-white p-2 rounded-full shadow-lg hover:bg-light-green transition duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -200,12 +204,14 @@
 
     <script>
         // Profile
+        const profileForm = document.getElementById('profile-form');
         document.getElementById('profile-picture').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById('profile-preview').src = e.target.result;
+                    profileForm.classList.remove('hidden');
                 }
                 reader.readAsDataURL(file);
             }
