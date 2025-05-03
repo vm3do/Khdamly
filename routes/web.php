@@ -27,6 +27,53 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/pending', [ArtisanController::class, 'pending'])->name('artisan.pending');
+
+
+
+Route::middleware(['pending'])->group(function(){
+    //users
+    Route::put('/user/{id}', [UserController::class, 'manage'])->name('user.manage');
+    Route::put('/user/{id}/update-personal-info', [UserController::class, 'updateInfo'])->name('user.update.info');
+    Route::put('/user/{id}/update-password', [UserController::class, 'updatePassword'])->name('user.update.password');
+    Route::put('/user/{id}/update-profile', [UserController::class, 'updateProfile'])->name('user.update.profile');
+    Route::put('/user/{id}/update-portfolio', [UserController::class, 'updatePortfolio'])->name('user.update.portfolio');
+    Route::get('settings', [UserController::class, 'settings'])->name('settings');
+
+    //artisans
+    Route::get('/', [ArtisanController::class,'homepage'])->name('homepage');
+    Route::get('/artisans', [ArtisanController::class,'index'])->name('artisans');
+    Route::get('/artisan/{id}', [ArtisanController::class, 'show'])->name('artisan.show');
+    Route::get('/artisan-dashboard', [ArtisanController::class, 'dashboard'])->name('artisan.dashboard');
+    Route::put('/artisan/{id}', [ArtisanController::class, 'update'])->name('artisan.update');
+
+    Route::delete('/artisan/{id}/portfolio/{portfolioId}', [ArtisanController::class, 'destroyPortfolio'])->name('artisan.portfolio.destroy');
+
+    //requests
+    Route::post('/artisan/{id}/request', [RequestController::class, 'store'])->name('artisan.request');
+
+    //reviews
+    Route::post('/review/{id}', [ReviewController::class, 'store'])->name('review.store');
+
+    // portfolios
+    Route::get('/artisan/{id}/portfolio', [PortfolioController::class, 'show'])->name('portfolio.show');
+
+    // requests & messages ( chat system )
+    Route::post('/artisan/{id}/request', [RequestController::class, 'store'])->name('request.store');
+    Route::put('/artisan/{id}/request', [RequestController::class, 'update'])->name('request.update');  
+    Route::delete('/artisan/{id}/request', [RequestController::class, 'destroy'])->name('request.destroy');
+    Route::get('/artisan/{id}/request', [RequestController::class, 'show'])->name('request.show');
+    Route::put('/artisan/{id}/request/approve', [RequestController::class, 'approve'])->name('request.approve');
+    Route::put('/artisan/{id}/request/refuse', [RequestController::class, 'refuse'])->name('request.refuse');
+
+    Route::get('/chats', [RequestController::class, 'chats'])->name('request.chats');
+    Route::get('/chat/{id}', [RequestController::class, 'showChat'])->name('request.show.chat');
+
+    // messages 
+    Route::post('/chat/{id}/message', [MessageController::class, 'store'])->name('message.store');
+});
+
+
 //admin
 Route::middleware(['admin'])->group(function(){
 
@@ -47,50 +94,4 @@ Route::middleware(['admin'])->group(function(){
     Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
     
 });
-
-
-//users
-Route::put('/user/{id}', [UserController::class, 'manage'])->name('user.manage');
-Route::put('/user/{id}/update-personal-info', [UserController::class, 'updateInfo'])->name('user.update.info');
-Route::put('/user/{id}/update-password', [UserController::class, 'updatePassword'])->name('user.update.password');
-Route::put('/user/{id}/update-profile', [UserController::class, 'updateProfile'])->name('user.update.profile');
-Route::put('/user/{id}/update-portfolio', [UserController::class, 'updatePortfolio'])->name('user.update.portfolio');
-Route::get('settings', [UserController::class, 'settings'])->name('settings');
-
-
-//artisans
-Route::get('/', [ArtisanController::class,'homepage'])->name('homepage');
-Route::get('/artisans', [ArtisanController::class,'index'])->name('artisans');
-Route::get('/artisan/{id}', [ArtisanController::class, 'show'])->name('artisan.show');
-Route::get('/artisan-dashboard', [ArtisanController::class, 'dashboard'])->name('artisan.dashboard');
-Route::put('/artisan/{id}', [ArtisanController::class, 'update'])->name('artisan.update');
-
-
-Route::delete('/artisan/{id}/portfolio/{portfolioId}', [ArtisanController::class, 'destroyPortfolio'])->name('artisan.portfolio.destroy');
-
-//requests
-Route::post('/artisan/{id}/request', [RequestController::class, 'store'])->name('artisan.request');
-
-//reviews
-Route::post('/review/{id}', [ReviewController::class, 'store'])->name('review.store');
-
-
-
-
-// portfolios
-Route::get('/artisan/{id}/portfolio', [PortfolioController::class, 'show'])->name('portfolio.show');
-
-// requests & messages ( chat system )
-Route::post('/artisan/{id}/request', [RequestController::class, 'store'])->name('request.store');
-Route::put('/artisan/{id}/request', [RequestController::class, 'update'])->name('request.update');  
-Route::delete('/artisan/{id}/request', [RequestController::class, 'destroy'])->name('request.destroy');
-Route::get('/artisan/{id}/request', [RequestController::class, 'show'])->name('request.show');
-Route::put('/artisan/{id}/request/approve', [RequestController::class, 'approve'])->name('request.approve');
-Route::put('/artisan/{id}/request/refuse', [RequestController::class, 'refuse'])->name('request.refuse');
-
-Route::get('/chats', [RequestController::class, 'chats'])->name('request.chats');
-Route::get('/chat/{id}', [RequestController::class, 'showChat'])->name('request.show.chat');
-
-// messages 
-Route::post('/chat/{id}/message', [MessageController::class, 'store'])->name('message.store');
 

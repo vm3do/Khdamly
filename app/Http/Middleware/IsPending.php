@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsAdmin
+class IsPending
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,8 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!auth()->check() && auth()->user()->role !== 'admin'){
-            abort(404);
+        if(auth()->user()->status == 'pending'){
+            return redirect()->route('artisan.pending');
         }
         return $next($request);
     }

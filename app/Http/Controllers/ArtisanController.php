@@ -83,5 +83,13 @@ class ArtisanController extends Controller
         return view('artisan.artisan-dashboard', compact('requests', 'requestsCount'));
     }
 
+    public function pending()
+    {
+        if (auth()->user()->role !== 'artisan' || auth()->user()->status === 'approved') {
+            return redirect()->route('homepage');
+        }
+        
+        return view('pending');
+    }
 
 }
