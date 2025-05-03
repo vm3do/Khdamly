@@ -25,6 +25,20 @@
             
             <div class="hidden lg:flex items-center space-x-6">
                 @auth
+                    @if(auth()->user()->role === 'admin')
+                        <a href="{{ route('dashbaord') }}" class="text-gray-700 hover:text-luxury-green transition duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            </svg>
+                        </a>
+                    @elseif(auth()->user()->role === 'artisan')
+                        <a href="{{ route('artisan.dashboard') }}" class="text-gray-700 hover:text-luxury-green transition duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            </svg>
+                        </a>
+                    @endif
+
                     <a href="{{ route('request.chats') }}" class="text-gray-700 hover:text-luxury-green transition duration-300 relative">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -84,6 +98,22 @@
                 </a>
                 <div class="flex flex-col space-y-3 pt-3 border-t border-gray-200">
                     @auth
+                        @if(auth()->user()->role === 'admin')
+                            <a href="{{ route('dashbaord') }}" class="flex items-center gap-2 text-gray-700 hover:text-luxury-green font-medium transition duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                </svg>
+                                Admin Dashboard
+                            </a>
+                        @elseif(auth()->user()->role === 'artisan')
+                            <a href="{{ route('artisan.dashboard') }}" class="flex items-center gap-2 text-gray-700 hover:text-luxury-green font-medium transition duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                </svg>
+                                Artisan Dashboard
+                            </a>
+                        @endif
+
                         <a href="{{ route('request.chats') }}" class="flex items-center gap-2 text-gray-700 hover:text-luxury-green font-medium transition duration-300">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>

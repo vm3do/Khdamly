@@ -57,10 +57,10 @@
                                     <div class="flex-1 min-w-0">
                                         <div class="flex items-center justify-between">
                                             <h3 class="font-medium text-gray-800">{{auth()->user()->role == 'client' ? $request->artisan->name : $request->client->name}}</h3>
-                                            <span class="text-sm text-gray-500">2h ago</span>
+                                            {{-- <span class="text-sm text-gray-500">2h ago</span> --}}
                                         </div>
-                                        <p class="text-sm text-gray-600 truncate">Thank you for your interest in my pottery
-                                            work...</p>
+                                        {{-- <p class="text-sm text-gray-600 truncate">Thank you for your interest in my pottery
+                                            work...</p> --}}
                                     </div>
                                 </div>
                             </button>

@@ -12,6 +12,9 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     public function showRegister(){
+        if (auth()->check()) {
+            return redirect()->route('artisans');
+        }
         $categories = Category::all();
         $categories->load(['subCategories']);
         // dd($categories->toArray());
@@ -19,6 +22,9 @@ class AuthController extends Controller
     }
 
     public function showLogin(){
+        if (auth()->check()) {
+            return redirect()->route('artisans');
+        }
         return view('auth.login');
     }
 

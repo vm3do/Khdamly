@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="flex flex-col lg:flex-row gap-6 mt-12">
-                        <a href="#join"
+                        <a href="{{route('register')}}"
                             class="bg-gold text-stone-900 px-12 py-4 font-semibold uppercase border-2 border-gold hover:bg-light-gold hover:border-light-gold transition duration-300 rounded-md text-center">
                             Join The Community
                         </a>
@@ -355,10 +355,10 @@
             <p class="text-light-gold text-xl mb-10 max-w-2xl mx-auto">Join our community of art lovers and connect
                 with master artisans who bring your vision to life.</p>
             <div class="flex flex-col md:flex-row gap-6 justify-center">
-                <a href="#"
+                <a href="{{route('register')}}"
                     class="bg-gold hover:bg-light-gold text-luxury-green font-semibold py-3 px-8 rounded-md transition duration-300">Join
                     as a Client</a>
-                <a href="#"
+                <a href="{{route('register')}}"
                     class="border-2 border-gold text-gold hover:bg-gold hover:text-luxury-green font-semibold py-3 px-8 rounded-md transition duration-300">Join
                     as an Artisan</a>
             </div>

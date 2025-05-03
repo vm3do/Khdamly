@@ -43,157 +43,159 @@
                     </div>
 
                     <!-- Chat List -->
-                    @foreach($requests as $request)
-                    <div class="space-y-4">
-                        <!-- Chat 1 -->
-                        <div
-                            class="flex items-center gap-4 p-4 rounded-xl hover:bg-cream/50 cursor-pointer transition duration-300">
-                            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gold">
-                                <img src="{{auth()->user()->role == 'client' ? 
-                                ( $request->artisan->profile_pic ? asset('storage/' . $request->artisan->profile_pic) : asset('images/profile.svg') )
-                                 : ( $request->client->profile_pic ? asset('storage/'. $request->client->profile_pic) : asset('images/profile.svg') )}}"
-                                    alt="Profile" class="w-full h-full object-cover">
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-gray-800">{{auth()->user()->role == 'client' ? $request->artisan->name : $request->client->name}}</h3>
-                                    <span class="text-sm text-gray-500">2h ago</span>
+                    @foreach ($requests as $request)
+                        <div class="space-y-4">
+                            <!-- Chat 1 -->
+                            <div
+                                class="flex items-center gap-4 p-4 rounded-xl hover:bg-cream/50 cursor-pointer transition duration-300">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gold">
+                                    <img src="{{ auth()->user()->role == 'client'
+                                        ? ($request->artisan->profile_pic
+                                            ? asset('storage/' . $request->artisan->profile_pic)
+                                            : asset('images/profile.svg'))
+                                        : ($request->client->profile_pic
+                                            ? asset('storage/' . $request->client->profile_pic)
+                                            : asset('images/profile.svg')) }}"
+                                        alt="Profile" class="w-full h-full object-cover">
                                 </div>
-                                <p class="text-sm text-gray-600 truncate">Thank you for your interest in my pottery
-                                    work...</p>
-                            </div>
-                        </div>
-                        @endforeach
-
-                        <!-- Chat 2 -->
-                        {{-- <div
-                            class="flex items-center gap-4 p-4 rounded-xl hover:bg-cream/50 cursor-pointer transition duration-300">
-                            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gold">
-                                <img src="https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                                    alt="Profile" class="w-full h-full object-cover">
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-center justify-between">
-                                    <h3 class="font-medium text-gray-800">Fatima Z</h3>
-                                    <span class="text-sm text-gray-500">1d ago</span>
-                                </div>
-                                <p class="text-sm text-gray-600 truncate">I've completed the textile design you
-                                    requested...</p>
-                            </div>
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chat Window -->
-            <div class="w-full lg:w-2/3">
-                <div
-                    class="bg-white rounded-2xl border-2 border-gold/20 shadow-lg shadow-gold/5 h-[600px] flex flex-col">
-                    <!-- Chat Header -->
-                    <div class="p-6 border-b border-gold/20">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gold">
-                                <img src="{{auth()->user()->role == 'client' ? 
-                                ( $request->artisan->profile_pic ? asset('storage/' . $request->artisan->profile_pic) : asset('images/profile.svg') )
-                                 : ( $request->client->profile_pic ? asset('storage/'. $request->client->profile_pic) : asset('images/profile.svg') )}}"
-                                    alt="Profile" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h3 class="font-playfair text-xl text-luxury-green">{{auth()->user()->role == 'client' ? $request->artisan->name : $request->client->name}}</h3>
-                                @if(auth()->user()->role == 'client')
-                                <p class="text-sm text-gray-500">{{$request->artisan->name}}</p>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Messages -->
-                    <div class="flex-1 p-6 overflow-y-auto space-y-6">
-                        @foreach($request->messages as $message)
-                        @if($message->sender_id == auth()->user()->id)
-                        <!-- Message -->
-                        <div class="flex items-start gap-4 justify-end">
-                            <div class="flex-1 max-w-[70%]">
-                                <div class="bg-luxury-green text-white rounded-2xl p-4">
-                                    <p class="text-white">{{$message->message}}</p>
-                                    @if($message->image)
-                                    <div class="mt-4">
-                                        <img src="{{ asset('storage/' . $message->image) }}"
-                                            alt="message_pic" class="w-full max-w-md rounded-xl object-cover hover:opacity-90 transition-opacity cursor-pointer">
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="font-medium text-gray-800">
+                                            {{ auth()->user()->role == 'client' ? $request->artisan->name : $request->client->name }}
+                                        </h3>
+                                        {{-- <span class="text-sm text-gray-500">2h ago</span> --}}
                                     </div>
-                                    @endif
+                                    {{-- <p class="text-sm text-gray-600 truncate">Thank you for your interest in my pottery
+                                    work...</p> --}}
                                 </div>
-                                <span class="text-xs text-gray-500 mt-1 text-right">1h ago</span>
                             </div>
-                        </div>
-                        @else
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gold">
-                                <img src="{{auth()->user()->role == 'client' ? 
-                                ( $request->artisan->profile_pic ? asset('storage/' . $request->artisan->profile_pic) : asset('images/profile.svg') )
-                                 : ( $request->client->profile_pic ? asset('storage/'. $request->client->profile_pic) : asset('images/profile.svg') ) }}"
-                                    alt="Profile" class="w-full h-full object-cover">
-                            </div>
-                            <div class="flex-1">
-                                <div class="bg-cream rounded-2xl p-4">
-                                    <p class="text-gray-800">{{$message->message}}</p>
-                                    @if($message->image)
-                                    <div class="mt-4">
-                                        <img src="{{ asset('storage/' . $message->image) }}"
-                                            alt="message_pic" class="w-full max-w-md rounded-xl object-cover hover:opacity-90 transition-opacity cursor-pointer">
-                                    </div>
-                                    @endif
-                                </div>
-                                <span class="text-xs text-gray-500 mt-1">2h ago</span>
-                            </div>
-                        </div>
-                        @endif 
-                        @endforeach
-
-                        
-                    </div>
-
-                    <!-- Input -->
-                    <div class="p-6 border-t border-gold/20">
-                        <!-- Image Preview -->
-                        <div id="image-preview" class="hidden mb-2 flex items-center gap-2">
-                            <div class="w-12 h-12 rounded-lg overflow-hidden border-2 border-gold/20">
-                                <img id="preview-img" src="" alt="Preview" class="w-full h-full object-cover">
-                            </div>
-                            <div class="flex-1">
-                                <p id="file-name" class="text-sm text-gray-600"></p>
-                            </div>
-                            <button onclick="removeImage()" class="text-gray-500 hover:text-red-500">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
-                        <form action="{{ route('message.store', $request->id) }}" method="POST" enctype="multipart/form-data" class="flex items-center gap-4">
-                            @csrf
-                            <div class="relative flex-1">
-                                <input name="message" type="text" placeholder="Type your message..."
-                                    class="w-full pl-4 pr-12 py-3 rounded-xl border-2 border-gold/20 focus:border-gold focus:outline-none transition duration-300">
-                                <label for="image-upload" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gold hover:text-luxury-green transition duration-300 cursor-pointer">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                    <input type="file" id="image-upload" name="image" class="hidden" accept="image/*" onchange="previewImage(this)">
-                                </label>
-                            </div>
-                            <button type="submit" class="p-2 text-gold hover:text-luxury-green transition duration-300">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                                </svg>
-                            </button>
-                        </form>
-                        
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
+
+        <!-- Chat Window -->
+        <div class="w-full lg:w-2/3">
+            <div class="bg-white rounded-2xl border-2 border-gold/20 shadow-lg shadow-gold/5 h-[600px] flex flex-col">
+                <!-- Chat Header -->
+                <div class="p-6 border-b border-gold/20">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gold">
+                            <img src="{{ auth()->user()->role == 'client'
+                                ? ($request->artisan->profile_pic
+                                    ? asset('storage/' . $request->artisan->profile_pic)
+                                    : asset('images/profile.svg'))
+                                : ($request->client->profile_pic
+                                    ? asset('storage/' . $request->client->profile_pic)
+                                    : asset('images/profile.svg')) }}"
+                                alt="Profile" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="font-playfair text-xl text-luxury-green">
+                                {{ auth()->user()->role == 'client' ? $request->artisan->name : $request->client->name }}
+                            </h3>
+                            @if (auth()->user()->role == 'client')
+                                <p class="text-sm text-gray-500">{{ $request->artisan->name }}</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages -->
+                <div class="flex-1 p-6 overflow-y-auto space-y-6">
+                    @foreach ($request->messages as $message)
+                        @if ($message->sender_id == auth()->user()->id)
+                            <!-- Message -->
+                            <div class="flex items-start gap-4 justify-end">
+                                <div class="flex-1 max-w-[70%]">
+                                    <div class="bg-luxury-green text-white rounded-2xl p-4">
+                                        <p class="text-white">{{ $message->message }}</p>
+                                        @if ($message->image)
+                                            <div class="mt-4">
+                                                <img src="{{ asset('storage/' . $message->image) }}" alt="message_pic"
+                                                    class="w-full max-w-md rounded-xl object-cover hover:opacity-90 transition-opacity cursor-pointer">
+                                            </div>
+                                        @endif
+                                    </div>
+                                    {{-- <span class="text-xs text-gray-500 mt-1 text-right">1h ago</span> --}}
+                                </div>
+                            </div>
+                        @else
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gold">
+                                    <img src="{{ auth()->user()->role == 'client'
+                                        ? ($request->artisan->profile_pic
+                                            ? asset('storage/' . $request->artisan->profile_pic)
+                                            : asset('images/profile.svg'))
+                                        : ($request->client->profile_pic
+                                            ? asset('storage/' . $request->client->profile_pic)
+                                            : asset('images/profile.svg')) }}"
+                                        alt="Profile" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <div class="bg-cream rounded-2xl p-4">
+                                        <p class="text-gray-800">{{ $message->message }}</p>
+                                        @if ($message->image)
+                                            <div class="mt-4">
+                                                <img src="{{ asset('storage/' . $message->image) }}" alt="message_pic"
+                                                    class="w-full max-w-md rounded-xl object-cover hover:opacity-90 transition-opacity cursor-pointer">
+                                            </div>
+                                        @endif
+                                    </div>
+                                    {{-- <span class="text-xs text-gray-500 mt-1">2h ago</span> --}}
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+
+
+                </div>
+
+                <!-- Input -->
+                <div class="p-6 border-t border-gold/20">
+                    <!-- Image Preview -->
+                    <div id="image-preview" class="hidden mb-2 flex items-center gap-2">
+                        <div class="w-12 h-12 rounded-lg overflow-hidden border-2 border-gold/20">
+                            <img id="preview-img" src="" alt="Preview" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <p id="file-name" class="text-sm text-gray-600"></p>
+                        </div>
+                        <button onclick="removeImage()" class="text-gray-500 hover:text-red-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <form action="{{ route('message.store', $request->id) }}" method="POST"
+                        enctype="multipart/form-data" class="flex items-center gap-4">
+                        @csrf
+                        <div class="relative flex-1">
+                            <input name="message" type="text" placeholder="Type your message..."
+                                class="w-full pl-4 pr-12 py-3 rounded-xl border-2 border-gold/20 focus:border-gold focus:outline-none transition duration-300">
+                            <label for="image-upload"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gold hover:text-luxury-green transition duration-300 cursor-pointer">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                <input type="file" id="image-upload" name="image" class="hidden"
+                                    accept="image/*" onchange="previewImage(this)">
+                            </label>
+                        </div>
+                        <button type="submit" class="p-2 text-gold hover:text-luxury-green transition duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                            </svg>
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
     @include('components.footer')
@@ -220,16 +222,16 @@
             const preview = document.getElementById('image-preview');
             const previewImg = document.getElementById('preview-img');
             const fileName = document.getElementById('file-name');
-            
+
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                
+
                 reader.onload = function(e) {
                     previewImg.src = e.target.result;
                     fileName.textContent = input.files[0].name;
                     preview.classList.remove('hidden');
                 }
-                
+
                 reader.readAsDataURL(input.files[0]);
             }
         }
@@ -239,7 +241,7 @@
             const previewImg = document.getElementById('preview-img');
             const fileName = document.getElementById('file-name');
             const input = document.getElementById('image-upload');
-            
+
             previewImg.src = '';
             fileName.textContent = '';
             input.value = '';
