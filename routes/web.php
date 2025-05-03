@@ -43,10 +43,9 @@ Route::middleware(['auth', 'pending', 'banned'])->group(function(){
         Route::get('settings', [UserController::class, 'settings'])->name('settings');
 
         //artisans
-        
         Route::get('/artisans', [ArtisanController::class,'index'])->name('artisans');
         Route::get('/artisan/{id}', [ArtisanController::class, 'show'])->name('artisan.show');
-        Route::get('/artisan-dashboard', [ArtisanController::class, 'dashboard'])->name('artisan.dashboard');
+
 
         //requests
         Route::post('/artisan/{id}/request', [RequestController::class, 'store'])->name('artisan.request');
@@ -63,6 +62,7 @@ Route::middleware(['auth', 'pending', 'banned'])->group(function(){
             Route::get('/artisan/{id}/request', [RequestController::class, 'show'])->name('request.show');
             Route::put('/artisan/{id}/request/approve', [RequestController::class, 'approve'])->name('request.approve');
             Route::put('/artisan/{id}/request/refuse', [RequestController::class, 'refuse'])->name('request.refuse');
+            Route::get('/artisan-dashboard', [ArtisanController::class, 'dashboard'])->name('artisan.dashboard');
         });
 
         Route::get('/chats', [RequestController::class, 'chats'])->name('request.chats');

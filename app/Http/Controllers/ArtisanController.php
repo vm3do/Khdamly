@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ArtisanController extends Controller
@@ -73,9 +74,24 @@ class ArtisanController extends Controller
     public function dashboard()
     {
         $requests = auth()->user()->artisanRequests()->where('status', 'pending')->with(['client'])->paginate(5);
+        $requests_data = auth()->user()->artisanRequests()
+                        ->selectRaw('MONTH(created_at) as month, COUNT(*) as monthly_requests')
+                        ->groupBy('month')
+                        ->pluck('monthly_requests', 'month');
+
+        // dd($requests_data->toArray());
+
+        $months = [];
+        $monthly_requests = [];
+
+        foreach(range(1, 12) as $month){
+            $months[] = Carbon::create()->month($month)->format('M');
+            $monthly_requests[] = $requests_data[$month] ?? 0;
+        }
         // dd($requests->toArray());
-        $requestsCount = $requests->count();
-        return view('artisan.artisan-dashboard', compact('requests', 'requestsCount'));
+        $requestsCount = $requests->total();
+        dd($monthly_requests);
+        return view('artisan.artisan-dashboard', compact('requests', 'requestsCount', 'months', 'monthly_requests'));
     }
 
     public function pending()
